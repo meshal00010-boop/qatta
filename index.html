@@ -311,6 +311,7 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(-
 :root{
  --bg:#F5F3EC;--surface:#FFFFFF;--surface2:#FBFAF6;
  --ink:#12211A;--ink2:#5F6B64;--ink3:#A3ABA5;
+ --a1:#1C7A5A;--a2:#14634A;--a3:#0E4A38;
  --emerald:#17694F;--emerald-d:#0E4A38;--emerald-l:rgba(23,105,79,.08);--emerald-m:rgba(23,105,79,.14);
  --gold:#E6C46E;--gold-h:#EDD08C;--gold-ink:#2A210B;
  --danger:#B3473B;--danger-l:rgba(179,71,59,.08);--success:#1F8A5B;
@@ -369,7 +370,7 @@ main{max-width:600px;padding:4px 20px calc(120px + env(safe-area-inset-bottom))}
 .pc.arch .tile{background:#EEECE5!important;color:var(--ink2)}
 
 /* tiles + avatars */
-.tile{border-radius:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.18);background:linear-gradient(150deg,#1D7A5B,#11563F)!important}
+.tile{border-radius:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.18);background:linear-gradient(150deg,var(--a1),var(--a3))!important}
 .tile svg.i{stroke-width:1.75}
 .av{font-weight:600;text-shadow:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.04)}
 .stack .av{border:2px solid var(--surface)}
@@ -393,7 +394,7 @@ main{max-width:600px;padding:4px 20px calc(120px + env(safe-area-inset-bottom))}
 .steps2 small b{color:var(--ink);font-weight:600}
 
 /* hero (action card) */
-.act{background:linear-gradient(155deg,#1C7A5A 0%,#14634A 48%,#0E4A38 100%)!important;border-radius:var(--r-l);padding:22px 20px 20px;box-shadow:var(--e-hero);isolation:isolate}
+.act{background:linear-gradient(155deg,var(--a1) 0%,var(--a2) 48%,var(--a3) 100%)!important;border-radius:var(--r-l);padding:22px 20px 20px;box-shadow:var(--e-hero);isolation:isolate}
 .act::after{display:block;content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(90% 60% at 100% 0%,rgba(255,255,255,.12),transparent 60%);top:0;left:0;width:auto;height:auto;z-index:-1}
 .act .k{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.14);font-size:12px;font-weight:500;padding:3px 10px;letter-spacing:.01em}
 .act h2{font-size:clamp(24px,6.6vw,28px);font-weight:700;margin:14px 0 4px;letter-spacing:-.01em}
@@ -418,7 +419,7 @@ main{max-width:600px;padding:4px 20px calc(120px + env(safe-area-inset-bottom))}
 
 /* buttons: one primary style, one secondary, clear states */
 .pill{border-radius:14px;min-height:52px;font-weight:600;transition:transform .12s var(--ease),filter .15s,background .15s,opacity .15s}
-.pill.pri{background:linear-gradient(180deg,#1C7A5A,#145F47);color:#fff;box-shadow:0 10px 22px -12px rgba(14,74,56,.7),inset 0 1px 0 rgba(255,255,255,.12)}
+.pill.pri{background:linear-gradient(180deg,var(--a1),var(--a2));color:#fff;box-shadow:0 10px 22px -12px rgba(14,74,56,.7),inset 0 1px 0 rgba(255,255,255,.12)}
 .pill:disabled,.pill[disabled]{opacity:.45;cursor:not-allowed;transform:none!important}
 .tst{border-radius:999px;min-height:34px;font-size:13px;transition:transform .12s var(--ease),filter .15s}
 .tst.go{background:var(--emerald);color:#fff}
@@ -450,7 +451,7 @@ main{max-width:600px;padding:4px 20px calc(120px + env(safe-area-inset-bottom))}
 .mme{color:var(--emerald)}
 
 /* welcome */
-.wel .appic{background:linear-gradient(150deg,#1D7A5B,#0E4A38);box-shadow:var(--e-hero);border-radius:24px}
+.wel .appic{background:linear-gradient(150deg,var(--a1),var(--a3));box-shadow:var(--e-hero);border-radius:24px}
 .feat .ico{background:var(--emerald-l)!important;color:var(--emerald);width:44px;height:44px;border-radius:13px}
 
 /* list states */
@@ -531,6 +532,22 @@ button:disabled{cursor:not-allowed}
 .leaflet-control-attribution{font-size:9px!important;background:rgba(255,255,255,.7)!important}
 .row-gh{display:flex;align-items:center;justify-content:space-between}
 .ghb{color:var(--emerald);font-weight:600;font-size:13px;min-height:28px;padding:0 4px}
+/* map type toggle */
+.mlay{position:absolute;bottom:16px;right:16px;z-index:700;display:flex;background:rgba(255,255,255,.95);border-radius:12px;padding:3px;box-shadow:var(--e2)}
+.mlay button{min-height:40px;padding:0 12px;border-radius:9px;font-size:13px;font-weight:600;color:var(--ink2);transition:background .15s,color .15s}
+.mlay button.on{background:var(--emerald);color:#fff}
+/* settings */
+.prof .pf-top{display:flex;align-items:center;gap:16px;padding:18px 16px}
+.prof .pf-top .av img{width:100%;height:100%;object-fit:cover}
+.pf-btns{display:flex;flex-wrap:wrap;gap:8px}
+.pill.sm2{min-height:40px;padding:0 14px;font-size:14px;border-radius:12px;background:var(--emerald-l);color:var(--emerald);cursor:pointer}
+.pill.sm2.ghost{background:transparent;color:var(--danger)}
+.swatches{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;padding:14px 8px}
+.sw{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--ink2);padding:4px 0;border-radius:12px}
+.sw span{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.25);transition:transform .15s var(--ease)}
+.sw.on{color:var(--ink);font-weight:600}.sw.on span{box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--emerald)}
+.sw:active span{transform:scale(.92)}
+.help svg.i{display:block}
 /* larger screens */
 @media (min-width:768px){
  main{padding-top:12px}
@@ -591,6 +608,8 @@ const I={
   box:'<svg class="i" viewBox="0 0 24 24"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>',
   share:'<svg class="i" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg>',
   pinT:'<svg class="i" viewBox="0 0 24 24"><path d="M12 17v5"/><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/></svg>',
+  gear:'<svg class="i" viewBox="0 0 24 24" style="width:19px;height:19px"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>',
+  camera:'<svg class="i" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>',
   edit:'<svg class="i" viewBox="0 0 24 24"><path d="M21.17 6.81a1 1 0 0 0-3.99-3.99L3.84 16.17a2 2 0 0 0-.5.83l-1.32 4.35a.5.5 0 0 0 .62.62l4.35-1.32a2 2 0 0 0 .83-.5z"/><path d="m15 5 4 4"/></svg>'
 };
 const CATS={dinner:{n:'وجبة',c:['#1F6F54','#1F6F54'],ic:'dish'},outing:{n:'كشتة',c:['#1F6F54','#1F6F54'],ic:'fire'},trip:{n:'رحلة',c:['#1F6F54','#1F6F54'],ic:'car'},gift:{n:'هدية',c:['#1F6F54','#1F6F54'],ic:'gift'},other:{n:'أخرى',c:['#1F6F54','#1F6F54'],ic:'coins'}};
@@ -599,6 +618,19 @@ const tile=(d,size)=>{const k=cat(d);return `<span class="tile" style="backgroun
 const PAL=[['#B9A77A','#B9A77A'],['#7E9C8C','#7E9C8C'],['#C9906B','#C9906B'],['#8C8FA8','#8C8FA8'],['#A88E9E','#A88E9E'],['#6F9A9C','#6F9A9C'],['#B5956A','#B5956A'],['#8BA07A','#8BA07A'],['#9C8576','#9C8576']];
 const hue=k=>{let h=0;for(const ch of String(k))h=(h*31+ch.charCodeAt(0))>>>0;return PAL[h%PAL.length]};
 let hudT;function hud(t,ok=true){const h=$('hud');h.innerHTML=(ok?I.check:'')+esc(t);h.classList.add('on');clearTimeout(hudT);hudT=setTimeout(()=>h.classList.remove('on'),1400)}
+const THEMES={
+  emerald:{n:'زمردي',c:'#17694F',a:['#1C7A5A','#14634A','#0E4A38']},
+  navy:{n:'كحلي',c:'#1F4E8C',a:['#2A63AD','#1F4E8C','#13325E']},
+  plum:{n:'بنفسجي',c:'#6B3A78',a:['#82498F','#6B3A78','#45244F']},
+  coffee:{n:'قهوة',c:'#7A4F2A',a:['#946238','#7A4F2A','#4F3018']},
+  charcoal:{n:'فحمي',c:'#2D3236',a:['#3E454A','#2D3236','#16191B']}};
+const rgba=(hex,a)=>{const n=parseInt(hex.slice(1),16);return `rgba(${n>>16},${n>>8&255},${n&255},${a})`};
+function themeKey(){try{return THEMES[localStorage.getItem('qatta-theme')]?localStorage.getItem('qatta-theme'):'emerald'}catch(e){return'emerald'}}
+function applyTheme(k){const t=THEMES[k]||THEMES.emerald,st=document.documentElement.style;
+  st.setProperty('--emerald',t.c);st.setProperty('--emerald-d',t.a[2]);st.setProperty('--emerald-l',rgba(t.c,.08));st.setProperty('--emerald-m',rgba(t.c,.14));
+  st.setProperty('--a1',t.a[0]);st.setProperty('--a2',t.a[1]);st.setProperty('--a3',t.a[2]);st.setProperty('--e-hero','0 22px 44px -24px '+rgba(t.a[2],.65));
+  try{localStorage.setItem('qatta-theme',k)}catch(e){}}
+applyTheme(themeKey());
 const LSK='qatta-seen';const seen=()=>{try{return localStorage.getItem(LSK)==='1'}catch(e){return true}};const markSeen=()=>{try{localStorage.setItem(LSK,'1')}catch(e){}};
 
 /* ---------- storage ---------- */
@@ -608,7 +640,7 @@ function localDB(){
   const merge=(a,b)=>{const o={...a};for(const k in b)o[k]=b[k]&&typeof b[k]==='object'&&!Array.isArray(b[k])?merge(a[k]||{},b[k]):b[k];return o};
   const doc=p=>({path:p,set:async d=>{S[p]=JSON.parse(JSON.stringify(d));save()},update:async d=>{S[p]=merge(S[p]||{},d);save()},delete:async()=>{delete S[p];save()},collection:c=>coll(p+'/'+c),onSnapshot(cb){const f=()=>cb({id:p.split('/').pop(),exists:p in S,data:()=>S[p],metadata:{fromCache:false}});L.add(f);setTimeout(f);return()=>L.delete(f)}});
   const coll=p=>({path:p,doc:id=>doc(p+'/'+(id||rid())),onSnapshot(cb){const f=()=>cb({docs:Object.keys(S).filter(k=>k.startsWith(p+'/')&&!k.slice(p.length+1).includes('/')).map(k=>({id:k.slice(p.length+1),data:()=>S[k]})),metadata:{fromCache:false}});L.add(f);setTimeout(f);return()=>L.delete(f)}});
-  return{doc,collection:coll,watchMyPools:cb=>coll('dinners').onSnapshot(s=>cb(s.docs.map(x=>x.id))),addPool:async()=>{},removePool:async()=>{},setName:async()=>{}};
+  return{setPhoto:async()=>{},doc,collection:coll,watchMyPools:cb=>coll('dinners').onSnapshot(s=>cb(s.docs.map(x=>x.id))),addPool:async()=>{},removePool:async()=>{},setName:async()=>{}};
 }
 /* Firebase: anonymous sign-in + Firestore, wrapped in the same small API the app already uses */
 async function firebaseDB(cfg){
@@ -627,7 +659,8 @@ async function firebaseDB(cfg){
     watchMyPools:cb=>F.onSnapshot(uref,s=>cb((s.exists()&&s.data().pools)||[]),()=>cb([])),
     addPool:id=>F.setDoc(uref,{pools:F.arrayUnion(id)},{merge:true}),
     removePool:id=>F.setDoc(uref,{pools:F.arrayRemove(id)},{merge:true}),
-    setName:n=>F.setDoc(uref,{name:n},{merge:true})};
+    setName:n=>F.setDoc(uref,{name:n},{merge:true}),
+    setPhoto:v=>F.setDoc(uref,{photo:v},{merge:true})};
 }
 let db=null,user=null,local=false,ro=false,note='',me={id:null,name:''},owner=false;
 let demo=null,realMe=null,realOwner=false;
@@ -692,7 +725,7 @@ const tstr=ts=>{try{const d=new Date(ts),t=d.toLocaleTimeString('ar-u-nu-latn',{
 
 /* ---------- names ---------- */
 async function names(ps){
-  const N={},A={};ps.forEach(p=>{N[p.k]=p.nick||(p.uid===me.id&&me.name)||'ضيف';A[p.k]=''});return{N,A};
+  const N={},A={};ps.forEach(p=>{N[p.k]=p.nick||(p.uid===me.id&&me.name)||'ضيف';A[p.k]=p.photo||(p.uid===me.id&&me.photo)||''});return{N,A};
 }
 const av=(k,sz)=>{const n=lastN.N[k]||'?',s=lastN.A[k],c=hue(lastN.N[k]||k);return `<span class="av" style="background:linear-gradient(160deg,${c[0]},${c[1]})${sz?';width:'+sz+'px;height:'+sz+'px':''}">${s?`<img alt="" src="${esc(s)}">`:esc(n.trim().slice(0,1))}</span>`};
 const stack=(ks,max=4)=>`<span class="stack">${ks.slice(0,max).map(k=>av(k)).join('')}${ks.length>max?`<span class="av more" dir="ltr">+${ks.length-max}</span>`:''}</span>`;
@@ -706,7 +739,7 @@ function canPay(d,x,c){const f=c.by[x.f],t=c.by[x.t];return !ro&&(canEditP(d,f)|
 /* ---------- what's on my plate in this pool ---------- */
 function myTodo(d,ps){
   const P=ph(d),c=calc(ps,d.by),uid=myUid(),mine=ps.find(p=>p.uid&&p.uid===uid),boss=isCreator(d);
-  if(P==='vote'){if(boss&&c.n<=1)return{t:'أرسل الرابط للقروب',k:''};if(!mine)return{t:'صوّت الحين',k:''};return{t:mine.going?'أنت معهم':'قلت ما تقدر',k:mine.going?'ok':'wait'}}
+  if(P==='vote'){if(boss)return{t:'التصويت مفتوح',k:'wait'};if(!mine)return{t:'صوّت الحين',k:''};return{t:mine.going?'أنت معهم':'قلت ما تقدر',k:mine.going?'ok':'wait'}}
   if(P==='shop'){if(boss)return{t:c.t>0?'اقسم المبلغ':'اشترِ وسجّل',k:''};return{t:'ننتظر الشراء',k:'wait'}}
   const myK=mine&&mine.k;if(!myK||!mine.going)return{t:c.sum&&c.got>=c.sum?'خلصت':'مرحلة الدفع',k:'wait'};
   const owe=c.T.filter(x=>x.f===myK&&!x.done).reduce((a,x)=>a+x.a,0);if(owe>0)return{t:'حوّل '+fmt(owe)+' ر.س',k:''};
@@ -726,7 +759,7 @@ function noteHtml(){
 }
 async function home(tok){
   const ds=[...dinners].sort((a,b)=>{const pa=ph(a)==='pay'?1:0,pb=ph(b)==='pay'?1:0;return pa-pb||(b.until||b.at||0)-(a.until||a.at||0)});
-  let h=demoBar()+`<h1 class="lt" id="lt">القطّات</h1><p class="lsub">${me.name?`أهلاً ${esc(me.name)} · <button class="rn" data-rename>تغيير الاسم</button>`:"قطّاتك مع الربع"}</p>`+noteHtml();
+  let h=demoBar()+`<h1 class="lt" id="lt">القطّات</h1><p class="lsub">${me.name?`أهلاً ${esc(me.name)}`:"قطّاتك مع الربع"}</p>`+noteHtml();
   if(!loaded&&!local)return h+`<p class="note">جاري التحميل…</p>`;
   const done=ds.filter(d=>isDone(d)),act=ds.filter(d=>!isDone(d));
   const archRow=done.length?`<a class="pc arch fade" href="#archive"><div class="pc-top"><span class="tile" style="background:#7C857F">${I.box}</span><span class="tx"><b>القطّات المنتهية</b><small>${P_(done.length,'قطّة وحدة','قطّتين','قطّات')}</small></span>${I.chev}</div></a>`:'';
@@ -867,14 +900,16 @@ async function detail(d,tok){
   detail.msg=P==='pay'?remind(d,c):P==='vote'?invite(d):shopMsg(d,c,host);
   return h;
 }
-function invite(d){return `${d.title}${d.place?' ('+d.place+')':''}\nمين معنا؟ صوّت قبل ${tstr(d.until)}:\n${link(d.id)}${d.loc?'\nالموقع: '+d.loc:''}`}
-function shopMsg(d,c,host){return `${d.title}: قفل التصويت، ${P_(c.n,'شخص','شخصين','أشخاص')} معنا.\n${host} يشتري الحين، وبعدها ينزل المبلغ في الرابط:\n${link(d.id)}`}
-function remind(d,c){
-  const left=c.T.filter(x=>!x.done);
-  let t=`قطّة ${d.title}\n`;
-  t+=left.length?left.map(x=>{const r=c.by[x.t];return `• ${lastN.N[x.f]} يحوّل ${fmt(x.a)} ر.س لـ ${lastN.N[x.t]}${r&&r.acct?' ('+r.acct+')':''}`}).join('\n'):'الكل حوّل، مشكورين';
-  return t+'\n'+link(d.id);
-}
+function invite(d){const m=mapsShort(d),L=[`*${d.title}*`];
+  if(d.place)L.push(`📍 ${d.place}`);
+  if(d.until)L.push(`⏰ ينتهي التصويت ${tstr(d.until)}`);
+  if(m)L.push(`🗺️ ${m}`);
+  L.push('','صوّت من هنا 👇',link(d.id));return L.join('\n')}
+function shopMsg(d,c,host){return [`*${d.title}*`,`قفل التصويت · ${P_(c.n,'شخص','شخصين','أشخاص')} معنا`,`${host} يشتري الحين، والمبلغ ينزل هنا 👇`,link(d.id)].join('\n')}
+function remind(d,c){const left=c.T.filter(x=>!x.done);
+  const L=[`*قطّة ${d.title}*`,`على كل واحد ${fmt(c.share)} ر.س`,''];
+  if(left.length)left.forEach(x=>{const r=c.by[x.t];L.push(`• ${lastN.N[x.f]} ← ${lastN.N[x.t]}: ${fmt(x.a)} ر.س${r&&r.acct?' ('+r.acct+')':''}`)});else L.push('الكل حوّل، مشكورين 🙏');
+  L.push('',link(d.id));return L.join('\n')}
 
 /* ---------- sheets ---------- */
 function shNav(title,save,saveTxt='حفظ',cancel='إلغاء'){return `<div class="shnav"><button class="nbtn" data-x>${cancel}</button><b>${title}</b>${save?`<button class="nbtn" id="${save}">${saveTxt}</button>`:'<span></span>'}</div>`}
@@ -909,6 +944,7 @@ function sheetHtml(){
   if(sh.kind==='map'){const has=sh.form&&(sh.form.lat!=null||sh.form.loc);return `<div class="shnav"><button class="nbtn" id="mapBack">إلغاء</button><b>اختر الموقع</b><span></span></div>
     <div class="mbody"><div class="mapwrap"><div id="map"></div><div class="mpin">${I.pinFill}<i></i></div>
       <div class="mtop"><label class="msearch">${I.search}<input id="mq" type="search" placeholder="ابحث عن مكان" enterkeyhint="search" autocomplete="off"><button type="button" class="mclr" id="mclr" hidden aria-label="مسح">×</button></label><div class="group mres" id="mres" hidden></div></div>
+      <div class="mlay" role="group" aria-label="نوع الخريطة"><button type="button" data-lay="map" class="${mapStyle()==='map'?'on':''}">خريطة</button><button type="button" data-lay="sat" class="${mapStyle()==='sat'?'on':''}">قمر صناعي</button></div>
       <button type="button" class="mme" id="mme" aria-label="موقعي الحالي">${I.locate}</button></div>
     <div class="mcard"><div class="mrow"><span class="mic">${I.pin}</span><span class="tx"><b id="mpn">جاري تحميل الخريطة…</b><small id="mco" class="num">حرّك الخريطة لين يصير الدبوس على المكان</small></span></div>
       <button class="pill pri wide" id="mapOk" disabled>${I.check} اختيار هذا الموقع</button>${has?'<button class="mrm" id="mapRm">إزالة الموقع</button>':''}</div></div>`}
@@ -952,7 +988,8 @@ function showSugg(ix){return;hideSugg();const inp=sheet.querySelector(`[data-in=
 let sy=0;
 function lockScroll(){if(document.body.style.position==='fixed')return;sy=window.scrollY;document.body.style.cssText=`position:fixed;top:-${sy}px;left:0;right:0;width:100%;overflow:hidden`}
 function unlockScroll(){if(document.body.style.position!=='fixed')return;document.body.style.cssText='';window.scrollTo(0,sy)}
-function locHref(d){if(d&&d.lat!=null&&d.lng!=null){return isIOS?`https://maps.apple.com/?ll=${d.lat},${d.lng}&q=${encodeURIComponent(d.place||'الموقع')}`:`https://www.google.com/maps/search/?api=1&query=${d.lat},${d.lng}`}return d&&d.loc||''}
+function mapsShort(d){return d&&d.lat!=null&&d.lng!=null?`https://maps.google.com/?q=${d.lat},${d.lng}`:(d&&d.loc)||''}
+function locHref(d){if(d&&d.lat!=null&&d.lng!=null){return `https://www.google.com/maps/search/?api=1&query=${d.lat},${d.lng}`}return d&&d.loc||''}
 function gmLink(lat,lng){return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`}
 function mapsUrl(k,q){q=(q||'').trim();return k==='g'?(q?'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q):'https://www.google.com/maps'):(q?'https://maps.apple.com/?q='+encodeURIComponent(q):'https://maps.apple.com/')}
 function cleanLoc(v){v=(v||'').trim();if(!v)return'';const m=v.match(/https?:\/\/\S+/);return m?m[0]:false}
@@ -995,7 +1032,10 @@ function readForm(){const d=sh.kind==='edit'?dinners.find(x=>x.id===cur)||{}:{},
 async function openMap(){sh.form=readForm();sh.back=sh.kind;sh.kind='map';sheet.classList.add('full','mapmode');reSheet();
   try{const L=await loadLeaflet();if(!sh||sh.kind!=='map')return;const f=sh.form,has=f.lat!=null;
     MAP=L.map('map',{zoomControl:false,attributionControl:true,tap:false}).setView(has?[f.lat,f.lng]:[24.7136,46.6753],has?17:11);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{maxZoom:20,subdomains:'abcd',attribution:'© OpenStreetMap © CARTO'}).addTo(MAP);
+    LAY={map:L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}),
+      sat:L.layerGroup([L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'© Esri'}),
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:19})])};
+    setLayer(mapStyle());
     MAP.attributionControl.setPrefix(false);
     MAP.on('movestart',()=>{const w=sheet.querySelector('.mapwrap');w&&w.classList.add('moving');const ok=$('mapOk');if(ok)ok.disabled=true});
     MAP.on('moveend',()=>{const w=sheet.querySelector('.mapwrap');w&&w.classList.remove('moving');onMapMove()});
@@ -1009,7 +1049,10 @@ function onMapMove(){if(!MAP)return;const c=MAP.getCenter();mGeo={lat:+c.lat.toF
   clearTimeout(mT);const at={...mGeo};mT=setTimeout(async()=>{try{const r=await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${at.lat}&lon=${at.lng}&zoom=18&accept-language=ar`);const j=await r.json(),a=j.address||{};
     if(!mGeo||mGeo.lat!==at.lat||mGeo.lng!==at.lng)return;
     mName=j.name||a.neighbourhood||a.suburb||a.road||a.village||a.town||a.city||(j.display_name||'').split(/[,،]/)[0]||'';const n2=$('mpn');if(n2)n2.textContent=mName||'موقع محدد'}catch(e){const n2=$('mpn');if(n2)n2.textContent='موقع محدد'}},600)}
-let meDot=null;
+let meDot=null,LAY=null;
+function mapStyle(){try{return localStorage.getItem('qatta-map')==='sat'?'sat':'map'}catch(e){return'map'}}
+function setLayer(k){if(!MAP||!LAY)return;Object.values(LAY).forEach(l=>{if(MAP.hasLayer&&MAP.hasLayer(l))MAP.removeLayer(l)});LAY[k].addTo(MAP);
+  try{localStorage.setItem('qatta-map',k)}catch(e){}sheet.querySelectorAll('[data-lay]').forEach(b=>{const on=b.dataset.lay===k;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)})}
 function locateMe(silent){if(!navigator.geolocation){if(!silent)hud('جوالك ما يدعم تحديد الموقع',false);return}
   const b=$('mme');b&&b.classList.add('busy');
   navigator.geolocation.getCurrentPosition(p=>{b&&b.classList.remove('busy');if(!MAP)return;const ll=[p.coords.latitude,p.coords.longitude];
@@ -1019,10 +1062,31 @@ function searchPlaces(q){clearTimeout(sT);const box=$('mres'),clr=$('mclr');if(c
   sT=setTimeout(async()=>{try{const c=MAP?MAP.getCenter():{lat:24.7,lng:46.7},vb=[c.lng-1.5,c.lat+1.5,c.lng+1.5,c.lat-1.5].join(',');
     const r=await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=6&accept-language=ar&countrycodes=sa&viewbox=${vb}&q=${encodeURIComponent(q)}`);const L=await r.json();const b=$('mres');if(!b)return;
     b.innerHTML=L.length?L.map(x=>{const nm=x.name||x.display_name.split(/[,،]/)[0];return `<button class="cell tap" data-res="${x.lat},${x.lon}" data-nm="${esc(nm)}"><span class="mic sm">${I.pin}</span><span class="tx"><span>${esc(nm)}</span><small>${esc(x.display_name.split(/[,،]/).slice(1,3).join('،'))}</small></span></button>`}).join(''):'<div class="cell"><span class="tx"><small>ما لقينا شي بهالاسم</small></span></div>';b.hidden=false}catch(e){}},500)}
-function closeMap(save){if(MAP){MAP.remove();MAP=null}meDot=null;sheet.classList.remove('full','mapmode');
+function closeMap(save){if(MAP){MAP.remove();MAP=null}meDot=null;LAY=null;sheet.classList.remove('full','mapmode');
   if(save===true&&mGeo){sh.form.lat=mGeo.lat;sh.form.lng=mGeo.lng;sh.form.loc=gmLink(mGeo.lat,mGeo.lng);if(mName)sh.form.place=(sh.form.place||'').trim()||mName;hud('تم تحديد الموقع')}
   if(save==='rm'){sh.form.lat=null;sh.form.lng=null;sh.form.loc=''}
   sh.kind=sh.back||'new';reSheet()}
+/* ---------- settings ---------- */
+function myPhotoHtml(sz){const s=me.photo,n=me.name||'?',c=hue(n);return `<span class="av" style="width:${sz}px;height:${sz}px;font-size:${Math.round(sz*.4)}px;background:linear-gradient(160deg,${c[0]},${c[1]})">${s?`<img alt="" src="${esc(s)}">`:esc(n.trim().slice(0,1))}</span>`}
+function settingsPage(){const tk=themeKey();
+  return `<h1 class="lt" id="lt">الإعدادات</h1><p class="lsub">حسابك وشكل التطبيق</p>
+  <div class="gh">الملف الشخصي</div><div class="group prof">
+    <div class="pf-top">${myPhotoHtml(76)}<div class="pf-btns"><label class="pill sm2">${I.camera} تغيير الصورة<input type="file" id="photoIn" accept="image/*" hidden></label>${me.photo?'<button class="pill sm2 ghost" data-rmphoto>إزالة</button>':''}</div></div>
+    <div class="cell"><input class="in-cell" id="setname" enterkeyhint="done" autocomplete="name" placeholder="اسمك" value="${esc(me.name||'')}"><button class="mini g" data-savename>حفظ</button></div></div>
+  <p class="gf">اسمك وصورتك يشوفها ربعك في القطّات.</p>
+  <div class="gh">لون التطبيق</div><div class="group swatches">${Object.entries(THEMES).map(([k,t])=>`<button class="sw ${k===tk?'on':''}" data-theme-k="${k}" aria-pressed="${k===tk}"><span style="background:linear-gradient(150deg,${t.a[0]},${t.a[2]})">${k===tk?I.check:''}</span>${t.n}</button>`).join('')}</div>
+  <div class="gh">مساعدة</div><div class="group"><button class="cell tap" data-help style="--indent:58px"><span class="ico">${I.people}</span><span class="tx">كيف يشتغل التطبيق</span>${I.chev}</button></div>
+  <p class="note" style="margin-top:28px">القطّة · الإصدار 1.3</p>`}
+function photoFile(f){if(!f)return;const img=new Image(),u=URL.createObjectURL(f);img.onload=()=>{const S=160,c=document.createElement('canvas');c.width=c.height=S;const x=c.getContext('2d'),m=Math.min(img.width,img.height);
+  x.drawImage(img,(img.width-m)/2,(img.height-m)/2,m,m,0,0,S,S);URL.revokeObjectURL(u);setPhoto(c.toDataURL('image/jpeg',.82))};img.onerror=()=>hud('ما قدرنا نقرأ الصورة',false);img.src=u}
+function setPhoto(v){me.photo=v||'';try{v?localStorage.setItem('qatta-photo',v):localStorage.removeItem('qatta-photo')}catch(e){}
+  db.setPhoto&&db.setPhoto(me.photo).catch(()=>{});
+  Object.entries(peopleBy).forEach(([did,ps])=>ps.filter(p=>p.uid===me.id&&(p.photo||'')!==me.photo).forEach(p=>{const r=pcol(did).doc(p.k);queue(r.path,()=>r.update({photo:me.photo}))}));
+  render();hud(v?'تم تغيير الصورة':'تمت إزالة الصورة')}
+function saveSetName(){const v=(($('setname')||{}).value||'').trim();if(!v){$('setname').focus();hud('اكتب اسمك',false);return}
+  me.name=v;try{localStorage.setItem('qatta-name',v)}catch(e){}db.setName&&db.setName(v).catch(()=>{});
+  Object.entries(peopleBy).forEach(([did,ps])=>ps.filter(p=>p.uid===me.id&&p.nick!==v).forEach(p=>{const r=pcol(did).doc(p.k);queue(r.path,()=>r.update({nick:v}))}));
+  document.activeElement&&document.activeElement.blur&&document.activeElement.blur();render();hud('تم الحفظ')}
 async function saveName(){const v=(($('myname')||{}).value||'').trim();if(!v){$('myname').focus();hud('اكتب اسمك',false);return}
   me.name=v;try{localStorage.setItem('qatta-name',v)}catch(e){}db.setName&&db.setName(v).catch(()=>{});
   Object.entries(peopleBy).forEach(([did,ps])=>ps.filter(p=>p.uid===me.id&&p.nick!==v).forEach(p=>{const r=pcol(did).doc(p.k);queue(r.path,()=>r.update({nick:v}))}));
@@ -1064,12 +1128,14 @@ app.addEventListener('pointermove',e=>{if(!sw||e.pointerId!==sw.id)return;const 
 function swEnd(){if(!sw)return;const s2=sw;sw=null;if(!s2.on)return;const W=swW(s2.w),t=s2.base+s2.dx;
   const pos=t>W.l/2?W.l:t<-W.r/2?-W.r:0;s2.w.classList.remove('dragging');s2.w.classList.toggle('open',pos!==0);s2.w.dataset.pos=pos;swSet(s2.w,pos,true);
   s2.c.dataset.drag='1';setTimeout(()=>{delete s2.c.dataset.drag},60)}
+app.addEventListener('change',e=>{if(e.target.id==='photoIn'){photoFile(e.target.files&&e.target.files[0]);e.target.value=''}});
+app.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='setname'){e.preventDefault();saveSetName()}});
 app.addEventListener('dragstart',e=>{if(e.target.closest&&e.target.closest('.swipe'))e.preventDefault()});
 app.addEventListener('pointerup',swEnd);app.addEventListener('pointercancel',swEnd);
 app.addEventListener('click',e=>{const c=e.target.closest('.swipe .pc');if(c&&(c.dataset.drag||c.parentElement.classList.contains('open'))){e.preventDefault();e.stopPropagation();if(!c.dataset.drag)swClose();return}
   const b=e.target.closest('[data-swa]');if(!b)return;e.preventDefault();e.stopPropagation();const id=b.dataset.id,d=dinners.find(x=>x.id===id);if(!d)return;
   if(b.dataset.swa==='pin'){swClose();togglePin(id);return}
-  if(b.dataset.swa==='share'){swClose();sendText(poolMsg(d));return}
+  if(b.dataset.swa==='share'){swClose();sendText(poolMsg(d),d.id);return}
   if(b.dataset.swa==='del'){const l=b.querySelector('.swl');if(!b.classList.contains('armed')){b.classList.add('armed');l.dataset.l=l.textContent;l.textContent='متأكد؟';setTimeout(()=>{if(b.isConnected&&b.classList.contains('armed')){b.classList.remove('armed');l.textContent=l.dataset.l}},3500);return}
     deletePool(id)}},true);
 
@@ -1090,7 +1156,7 @@ function syncSubs(){
 }
 let lastRoute=null;
 async function render(){
-  const tok=++rtok,r=route();const fresh=r!==lastRoute;lastRoute=r;if(fresh){app.classList.remove('enter');void app.offsetWidth;app.classList.add('enter');clearTimeout(render.t);render.t=setTimeout(()=>app.classList.remove('enter'),700)}
+  const tok=++rtok,r=route();if(r!=='settings')$('helpB').style.visibility='';const fresh=r!==lastRoute;lastRoute=r;if(fresh){app.classList.remove('enter');void app.offsetWidth;app.classList.add('enter');clearTimeout(render.t);render.t=setTimeout(()=>app.classList.remove('enter'),700)}
   if(r.startsWith('d-')){
     cur=r.slice(2);watchPool(cur);syncSubs();
     const d=dinners.find(x=>x.id===cur);
@@ -1100,14 +1166,16 @@ async function render(){
     if(sh&&(sh.kind==='tr'||sh.kind==='votes'))reSheet();
     return;
   }
+  if(r==='settings'){cur=null;$('back').hidden=false;$('back').href='#';$('back').lastChild.textContent='القطّات';$('fab').hidden=true;{const hb=$('helpB');hb.style.visibility='hidden'}$('ntitle').textContent='الإعدادات';
+    app.innerHTML=settingsPage();watchTitle();return}
   if(r==='archive'){cur=null;$('back').hidden=false;$('back').href='#';$('back').lastChild.textContent='القطّات';$('fab').hidden=true;{const hb=$('helpB');hb.textContent='؟';hb.classList.add('help');hb.dataset.mode='help'}$('ntitle').textContent='المنتهية';
     const h=await archive(tok);if(h===null||tok!==rtok)return;app.innerHTML=h;watchTitle();return}
-  cur=null;$('back').hidden=true;$('back').href='#';$('back').lastChild.textContent='القطّات';$('fab').hidden=false;{const hb=$('helpB');hb.textContent='؟';hb.classList.add('help');hb.dataset.mode='help'}$('ntitle').textContent='القطّات';
+  cur=null;$('back').hidden=true;$('back').href='#';$('back').lastChild.textContent='القطّات';$('fab').hidden=false;{const hb=$('helpB');hb.innerHTML=I.gear;hb.classList.add('help');hb.dataset.mode='settings';hb.setAttribute('aria-label','الإعدادات')}$('ntitle').textContent='القطّات';
   const h=await home(tok);if(h===null||tok!==rtok)return;app.innerHTML=h;watchTitle();
 }
 
 /* ---------- actions ---------- */
-function blankP(extra){return{uid:null,nick:'',manual:false,going:true,items:[],acct:'',paid:{},at:Date.now(),...extra}}
+function blankP(extra){const o={uid:null,nick:'',manual:false,going:true,items:[],acct:'',paid:{},at:Date.now(),...extra};if(o.uid&&o.uid===myUid()&&me.photo&&!o.photo)o.photo=me.photo;return o}
 function vote(v){
   const uid=myUid();if(!uid){hud('سجّل دخول',false);return}
   const d=dinners.find(x=>x.id===cur);if(ph(d)!=='vote'){hud('التصويت مقفل',false);render();return}
@@ -1127,19 +1195,23 @@ function request(){
 }
 function togglePay(f,t){const p=ppl(cur).find(x=>x.k===f);if(!p)return;const val=p.paid&&p.paid[t]?0:Date.now(),ref=pref(f);queue(ref.path,()=>ref.update({paid:{[t]:val}}));if(val)hud('تم، شكراً')}
 /* the phone's own share menu; WhatsApp is the fallback where the menu isn't available */
-function sendText(text){return shareMsg(text)}
-async function shareMsg(t){const text=t||detail.msg||'';
-  const m=text.match(/https?:\/\/\S+$/),url=m?m[0]:APP_URL,body=m?text.slice(0,m.index).trim():text;
+function sendText(text,id){return shareMsg(text,id)}
+async function shareMsg(t,id){const text=t||detail.msg||'';
+  const url=link(id||cur),body=text.split(url).join('').trim();
   if(navigator.share){try{await navigator.share({title:'القطّة',text:body,url});return}catch(e){if(e&&e.name==='AbortError')return}}
   const a=document.createElement('a');a.href='https://wa.me/?text='+encodeURIComponent(text);a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove()}
 async function copy(t,ok='تم النسخ'){try{await navigator.clipboard.writeText(String(t));hud(ok)}catch(e){hud('تعذّر النسخ',false)}}
 
-$('helpB').addEventListener('click',e=>{if(e.currentTarget.dataset.mode==='edit'){const d=dinners.find(x=>x.id===cur);openSheet({kind:'edit',cat:(d&&d.cat)||'dinner'})}else openSheet({kind:'welcome'})});
+$('helpB').addEventListener('click',e=>{if(e.currentTarget.dataset.mode==='settings'){location.hash='settings';return}if(e.currentTarget.dataset.mode==='edit'){const d=dinners.find(x=>x.id===cur);openSheet({kind:'edit',cat:(d&&d.cat)||'dinner'})}else openSheet({kind:'welcome'})});
 $('fab').addEventListener('click',()=>openSheet({kind:'new',cat:'dinner'}));
 app.addEventListener('click',e=>{
   const b=e.target.closest('button,[data-ed]');if(!b)return;
   if(b.hasAttribute('data-wa')){shareMsg();return}
-  if(b.hasAttribute('data-rename')){openSheet({kind:'name'});return}
+  if(b.hasAttribute('data-rename')){location.hash='settings';return}
+  if(b.hasAttribute('data-savename')){saveSetName();return}
+  if(b.hasAttribute('data-rmphoto')){setPhoto('');return}
+  if(b.dataset.themeK){applyTheme(b.dataset.themeK);render();return}
+  if(b.hasAttribute('data-help')){openSheet({kind:'welcome'});return}
   if(b.hasAttribute('data-demo')){enterDemo();hud('صرت واحد من الربع');return}
   if(b.hasAttribute('data-exitdemo')){exitDemo();return}
   if(b.hasAttribute('data-votes')){openSheet({kind:'votes'});return}
@@ -1181,6 +1253,7 @@ sheet.addEventListener('click',e=>{
   if(b.id==='mapOk'){if(!mGeo){hud('الخريطة تتحمّل',false);return}closeMap(true);return}
   if(b.id==='mapRm'){closeMap('rm');return}
   if(b.id==='mme'){locateMe(false);return}
+  if(b.dataset.lay){setLayer(b.dataset.lay);return}
   if(b.id==='mclr'){const q=$('mq');q.value='';searchPlaces('');q.focus();return}
   if(b.dataset.res){const [la,lo]=b.dataset.res.split(',').map(Number);mName=b.dataset.nm||'';mLock=true;MAP&&MAP.setView([la,lo],16);const bx=$('mres');bx.hidden=true;const q=$('mq');q&&q.blur();return}
   if(b.id==='svName'){saveName();return}
@@ -1259,11 +1332,11 @@ setInterval(()=>{tick++;const busy=document.activeElement&&document.activeElemen
 
 /* ---------- boot ---------- */
 (async()=>{
-  const cfg=window.QATTA_FIREBASE;let nm='';try{nm=localStorage.getItem('qatta-name')||''}catch(e){}
+  const cfg=window.QATTA_FIREBASE;let nm='',ph0='';try{nm=localStorage.getItem('qatta-name')||'';ph0=localStorage.getItem('qatta-photo')||''}catch(e){}
   if(cfg&&cfg.apiKey&&!/^PUT/.test(cfg.apiKey)){
-    try{db=await firebaseDB(cfg);me={id:db.uid,name:nm}}catch(e){console.error(e);note='err';db=null}
+    try{db=await firebaseDB(cfg);me={id:db.uid,name:nm,photo:ph0}}catch(e){console.error(e);note='err';db=null}
   }
-  if(!db){db=localDB();local=true;if(note!=='err')note='local';me={id:'me',name:nm}}
+  if(!db){db=localDB();local=true;if(note!=='err')note='local';me={id:'me',name:nm,photo:ph0}}
   const timer=setTimeout(()=>{if(!loaded){note='slow';render()}},10000);
   db.watchMyPools(ids=>{clearTimeout(timer);if(note==='slow')note='';
     ids.forEach(watchPool);
