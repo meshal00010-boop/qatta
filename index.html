@@ -202,7 +202,7 @@ main{max-width:640px;margin:auto;padding:0 16px calc(110px + env(safe-area-inset
 .veil.on{opacity:1;pointer-events:auto}
 .sheet{position:fixed;left:0;right:0;bottom:0;margin:auto;max-width:640px;max-height:calc(100% - 44px - env(safe-area-inset-top));overflow:auto;background:#f4f2f0;border-radius:16px 16px 0 0;z-index:9;transform:translateY(102%);visibility:hidden;transition:transform .38s cubic-bezier(.2,.9,.25,1),visibility 0s .38s;padding:0 16px calc(28px + env(safe-area-inset-bottom));overscroll-behavior:contain}
 .sheet.on{transform:none;visibility:visible;transition:transform .38s cubic-bezier(.2,.9,.25,1)}
-.sheet .group{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none}
+.sheet .group{background:var(--surface);-webkit-backdrop-filter:none;backdrop-filter:none}
 .shnav{position:sticky;top:0;background:#f4f2f0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:56px;margin:0 -16px;padding:0 16px;z-index:1}
 .shnav::before{content:"";position:absolute;top:6px;left:50%;width:36px;height:5px;margin-left:-18px;border-radius:3px;background:var(--l3)}
 .shnav b{font-weight:600}
@@ -280,6 +280,8 @@ main{max-width:640px;margin:auto;padding:0 16px calc(110px + env(safe-area-inset
 .wel{padding:8px 8px 4px;text-align:center}
 .wel .appic{width:84px;height:84px;border-radius:22px;margin:18px auto 14px;display:grid;place-items:center;background:linear-gradient(140deg,#ffb347,#ff7a00 55%,#ff4d6d);color:#fff;box-shadow:0 14px 30px -14px rgba(255,100,0,.8)}
 .wel .appic svg.i{width:46px;height:46px}
+.appic{display:grid;place-items:center;overflow:hidden}.appic img.lgimg{width:100%;height:100%;display:block}
+.empty .appic.sm{width:72px;height:72px;margin:0 auto 16px;border-radius:20px;background:linear-gradient(150deg,var(--a1),var(--a3));box-shadow:var(--e-hero)}
 .wel h2{font-size:30px;font-weight:700;margin:0 0 4px;letter-spacing:-.02em}
 .wel>p{color:var(--l2);margin:0 0 24px}
 .feat{display:flex;gap:14px;text-align:start;margin:0 6px 20px;align-items:flex-start}
@@ -310,14 +312,14 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(-
    motion: 120ms press, 220–380ms entrances on route change only, spring sheets; all off with reduced motion. */
 :root{
  --bg:#F5F3EC;--surface:#FFFFFF;--surface2:#FBFAF6;
- --ink:#12211A;--ink2:#5F6B64;--ink3:#A3ABA5;
+ --ink:#0F1E17;--ink2:#4A5750;--ink3:#8A948E;
  --a1:#1C7A5A;--a2:#14634A;--a3:#0E4A38;
  --emerald:#17694F;--emerald-d:#0E4A38;--emerald-l:rgba(23,105,79,.08);--emerald-m:rgba(23,105,79,.14);
  --gold:#E6C46E;--gold-h:#EDD08C;--gold-ink:#2A210B;
  --danger:#B3473B;--danger-l:rgba(179,71,59,.08);--success:#1F8A5B;
- --line:rgba(18,33,26,.07);--line2:rgba(18,33,26,.11);
+ --line:rgba(18,33,26,.08);--line2:rgba(18,33,26,.13);
  --r-s:12px;--r-m:16px;--r-l:24px;
- --e1:0 1px 2px rgba(14,40,30,.04),0 4px 14px -8px rgba(14,40,30,.10);
+ --e1:0 1px 2px rgba(14,40,30,.06),0 6px 18px -8px rgba(14,40,30,.16);
  --e2:0 1px 2px rgba(14,40,30,.05),0 14px 30px -14px rgba(14,40,30,.18);
  --e-hero:0 22px 44px -24px rgba(14,74,56,.65);
  --ease:cubic-bezier(.2,.8,.2,1);--spring:cubic-bezier(.22,1.2,.36,1);
@@ -326,7 +328,7 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(-
  --tint:var(--emerald);--tintT:var(--emerald);--green:var(--success);--greenT:var(--emerald);--redT:var(--danger);
  --nav:rgba(245,243,236,.82);--sh:var(--e1)}
 html{background:var(--bg)}
-body{background:radial-gradient(120% 60% at 100% -10%,rgba(23,105,79,.07),transparent 60%),radial-gradient(80% 40% at 0% 0%,rgba(230,196,110,.10),transparent 60%),var(--bg);background-attachment:fixed;
+body{background:radial-gradient(120% 55% at 100% -10%,var(--emerald-m),transparent 62%),radial-gradient(80% 40% at 0% 0%,rgba(230,196,110,.16),transparent 60%),var(--bg);
  font-family:"IBM Plex Sans Arabic",-apple-system,"SF Arabic",system-ui,sans-serif;color:var(--ink);font-size:16px;line-height:1.5;letter-spacing:0}
 .glow{display:none}
 .num{font-variant-numeric:tabular-nums lining-nums}
@@ -343,7 +345,7 @@ svg.i{stroke-width:1.75}
 main{max-width:600px;padding:4px 20px calc(120px + env(safe-area-inset-bottom))}
 .lt{font-size:32px;font-weight:700;letter-spacing:-.01em;line-height:1.2}
 .lsub{font-size:15px;color:var(--ink2);margin:4px 2px 22px}
-.gh{font-size:13px;font-weight:600;color:var(--ink2);margin:28px 6px 10px;letter-spacing:.01em}
+.gh{font-size:14px;font-weight:700;color:var(--ink);margin:28px 6px 10px;letter-spacing:.01em}
 .gf{font-size:13px;color:var(--ink2);margin:10px 6px 0}
 .note{color:var(--ink2);background:var(--surface2);border:1px dashed var(--line2);border-radius:var(--r-s);padding:8px 12px;margin:0 0 16px}
 .rn{color:var(--emerald)}
@@ -451,7 +453,7 @@ main{max-width:600px;padding:4px 20px calc(120px + env(safe-area-inset-bottom))}
 .mme{color:var(--emerald)}
 
 /* welcome */
-.wel .appic{background:linear-gradient(150deg,var(--a1),var(--a3));box-shadow:var(--e-hero);border-radius:24px}
+.wel .appic{background:linear-gradient(150deg,var(--a1),var(--a3));box-shadow:var(--e-hero);border-radius:24px;color:#F3E6CF}
 .feat .ico{background:var(--emerald-l)!important;color:var(--emerald);width:44px;height:44px;border-radius:13px}
 
 /* list states */
@@ -549,15 +551,20 @@ button:disabled{cursor:not-allowed}
 .sw:active span{transform:scale(.92)}
 .help svg.i{display:block}
 /* tab bar */
-.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:6;display:grid;grid-template-columns:1fr 1fr;padding:6px 0 calc(6px + env(safe-area-inset-bottom));background:var(--nav);-webkit-backdrop-filter:saturate(170%) blur(20px);backdrop-filter:saturate(170%) blur(20px);box-shadow:0 -1px 0 var(--line)}
+html,body{height:100%;overflow:hidden}
+body{position:fixed;inset:0;display:flex;flex-direction:column}
+#scr{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+.tabbar{position:relative;flex:none;z-index:6;display:grid;grid-template-columns:1fr 1fr;padding:6px 0 calc(4px + env(safe-area-inset-bottom));background:var(--surface);border-top:1px solid var(--line2)}
+.tabbar .ti{display:grid;place-items:center;width:64px;height:32px;border-radius:999px;transition:background .2s var(--ease)}
+.tabbar a.on .ti{background:var(--emerald-m)}
 .tabbar[hidden]{display:none}
 .tabbar a{display:flex;flex-direction:column;align-items:center;gap:3px;min-height:48px;justify-content:center;color:var(--ink3);font-size:11px;transition:color .15s}
 .tabbar a b{font-weight:600}
 .tabbar a.on{color:var(--emerald)}
 .tabbar .ti svg.i{width:25px;height:25px}
 .tabbar a:active .ti{transform:scale(.9)}
-body.has-tabs main{padding-bottom:calc(170px + env(safe-area-inset-bottom))}
-body.has-tabs .fab{bottom:calc(76px + env(safe-area-inset-bottom))}
+body.has-tabs main{padding-bottom:110px}
+body.has-tabs .fab{bottom:calc(82px + env(safe-area-inset-bottom))}
 /* segmented filter */
 .seg2{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;margin:0 0 18px;background:rgba(118,118,128,.1);border-radius:13px}
 .seg2 button{min-height:38px;border-radius:10px;font-size:14px;font-weight:600;color:var(--ink2);display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:background .2s var(--ease),color .2s,box-shadow .2s}
@@ -568,6 +575,10 @@ body.has-tabs .fab{bottom:calc(76px + env(safe-area-inset-bottom))}
 .sw.on .bgs{box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--emerald)!important}
 [dir=ltr] .chev,[dir=ltr] #back svg,[dir=ltr] .big-amt .who svg{transform:scaleX(-1)}
 [dir=ltr] body{font-family:-apple-system,"SF Pro Text","IBM Plex Sans Arabic",system-ui,sans-serif}
+.swatches.s6{grid-template-columns:repeat(6,minmax(0,1fr))}
+.swatches.s6 .sw span{width:40px;height:40px}
+.chips button,.cats button,.msearch,.mcard,.mme,.hud{background:var(--surface)}
+.pbox:focus-within{background:var(--surface)}
 /* larger screens */
 @media (min-width:768px){
  main{padding-top:12px}
@@ -579,12 +590,12 @@ body.has-tabs .fab{bottom:calc(76px + env(safe-area-inset-bottom))}
 </head>
 <body>
 <div class="glow"><i></i><i></i><i></i><i></i></div>
-<header class="nav" id="nav"><div class="navin">
+<div id="scr"><header class="nav" id="nav"><div class="navin">
   <a class="nbtn" id="back" href="#" hidden><svg class="i" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>القطّات</a>
   <span class="ntitle" id="ntitle">القطّات</span>
   <button class="nbtn help" id="helpB" aria-label="كيف يشتغل التطبيق">؟</button>
 </div></header>
-<main id="app"><h1 class="lt">القطّات</h1></main>
+<main id="app"><h1 class="lt">القطّات</h1></main></div>
 <div class="fab" id="fab"><button class="pill pri wide" data-new>+ قطّة جديدة</button></div>
 <nav class="tabbar" id="tabbar" aria-label="التنقل"><a href="#" data-tab="home" class="on"><span class="ti" id="tiHome"></span><b>الرئيسية</b></a><a href="#settings" data-tab="acct"><span class="ti" id="tiAcct"></span><b>الحساب</b></a></nav>
 <div class="veil" id="veil"></div>
@@ -593,6 +604,7 @@ body.has-tabs .fab{bottom:calc(76px + env(safe-area-inset-bottom))}
 <script>
 {
 const APP_URL=location.origin+location.pathname;
+const SCR=document.getElementById('scr');
 const isIOS=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 const $=id=>document.getElementById(id);
 const app=$('app'),sheet=$('sheet'),veil=$('veil'),nav=$('nav');
@@ -610,6 +622,7 @@ const I={
   people:'<svg class="i" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
   addp:'<svg class="i" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>',
   cart:'<svg class="i" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>',
+  logo:'<img class="lgimg" src="icon-512.png" alt="">',
   coins:'<svg class="i" viewBox="0 0 24 24"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>',
   dish:'<svg class="i" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>',
   fire:'<svg class="i" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>',
@@ -690,7 +703,7 @@ const EN={
 'التطبيق يقسم المبلغ، ويقول لكل واحد كم يحوّل ولمين، ويتابع مين حوّل.':'The app splits the bill, tells everyone who to pay and how much, and tracks who paid.',
 'يلا نبدأ':"Let's go",'اسمك وصورتك وشكل التطبيق':'Your name, photo and look','الملف الشخصي':'Profile','تغيير الصورة':'Change photo',
 'اسمك وصورتك يشوفها ربعك في القطّات.':'Friends see your name and photo in pools.','اللغة':'Language','لون الخلفية':'Background','اللون الأساسي':'Main colour',
-'عاجي':'Ivory','أبيض':'White','رمادي':'Grey','نعناعي':'Mint','رملي':'Sand','زمردي':'Emerald','كحلي':'Navy','بنفسجي':'Plum','قهوة':'Coffee','فحمي':'Charcoal',
+'عاجي':'Ivory','كريمي':'Cream','لؤلؤي':'Pearl','وردي':'Blush','سماوي':'Sky','لون القوائم والبطاقات':'Cards & lists','أبيض':'White','رمادي':'Grey','نعناعي':'Mint','رملي':'Sand','زمردي':'Emerald','كحلي':'Navy','بنفسجي':'Plum','قهوة':'Coffee','فحمي':'Charcoal',
 'مساعدة':'Help','كيف يشتغل التطبيق':'How it works','القطّة · الإصدار 1.3':'Qatta · version 1.3',
 'تم الحفظ':'Saved','تمت الإضافة':'Added','تمت الإزالة':'Removed','تم الحذف':'Deleted','تم القبول':'Accepted','تم النسخ':'Copied','تم نسخ الرابط':'Link copied',
 'تعذّر النسخ':"Couldn't copy",'تم، شكراً':'Done, thanks','تم التثبيت':'Pinned','تم إلغاء التثبيت':'Unpinned','تم تقسيم المبلغ':'Bill split','تم قفل التصويت':'Voting closed',
@@ -772,23 +785,28 @@ function setLang(l){LANG=l==='en'?'en':'ar';try{localStorage.setItem('qatta-lang
   if(LANG==='ar'){location.reload();return}applyLang();render()}
 
 const THEMES={
-  emerald:{n:'زمردي',c:'#17694F',a:['#1C7A5A','#14634A','#0E4A38']},
-  navy:{n:'كحلي',c:'#1F4E8C',a:['#2A63AD','#1F4E8C','#13325E']},
-  plum:{n:'بنفسجي',c:'#6B3A78',a:['#82498F','#6B3A78','#45244F']},
-  coffee:{n:'قهوة',c:'#7A4F2A',a:['#946238','#7A4F2A','#4F3018']},
-  charcoal:{n:'فحمي',c:'#2D3236',a:['#3E454A','#2D3236','#16191B']}};
+  emerald:{n:'زمردي',c:'#0E8A5F',a:['#16A572','#0E8A5F','#09603F']},
+  navy:{n:'كحلي',c:'#2459C8',a:['#3B76E6','#2459C8','#173C8C']},
+  plum:{n:'بنفسجي',c:'#7D3FA6',a:['#9A58C6','#7D3FA6','#502470']},
+  coffee:{n:'قهوة',c:'#A0602A',a:['#C07A38','#A0602A','#633A16']},
+  charcoal:{n:'فحمي',c:'#2E3A45',a:['#45535F','#2E3A45','#161D24']}};
 const rgba=(hex,a)=>{const n=parseInt(hex.slice(1),16);return `rgba(${n>>16},${n>>8&255},${n&255},${a})`};
 function themeKey(){try{return THEMES[localStorage.getItem('qatta-theme')]?localStorage.getItem('qatta-theme'):'emerald'}catch(e){return'emerald'}}
 function applyTheme(k){const t=THEMES[k]||THEMES.emerald,st=document.documentElement.style;
-  st.setProperty('--emerald',t.c);st.setProperty('--emerald-d',t.a[2]);st.setProperty('--emerald-l',rgba(t.c,.08));st.setProperty('--emerald-m',rgba(t.c,.14));
+  st.setProperty('--emerald',t.c);st.setProperty('--emerald-d',t.a[2]);st.setProperty('--emerald-l',rgba(t.c,.11));st.setProperty('--emerald-m',rgba(t.c,.18));
   st.setProperty('--a1',t.a[0]);st.setProperty('--a2',t.a[1]);st.setProperty('--a3',t.a[2]);st.setProperty('--e-hero','0 22px 44px -24px '+rgba(t.a[2],.65));
   try{localStorage.setItem('qatta-theme',k)}catch(e){}}
 applyTheme(themeKey());
-const BGS={ivory:{n:'عاجي',bg:'#F5F3EC',s2:'#FBFAF6'},white:{n:'أبيض',bg:'#FFFFFF',s2:'#F7F7F5'},grey:{n:'رمادي',bg:'#F2F2F7',s2:'#F8F8FA'},mint:{n:'نعناعي',bg:'#EEF5F1',s2:'#F6FAF8'},sand:{n:'رملي',bg:'#F4EEE4',s2:'#FAF6F0'}};
+const BGS={ivory:{n:'عاجي',bg:'#F2EFE5',s2:'#FAF8F2'},white:{n:'أبيض',bg:'#FFFFFF',s2:'#F7F7F5'},grey:{n:'رمادي',bg:'#F2F2F7',s2:'#F8F8FA'},mint:{n:'نعناعي',bg:'#E8F2EC',s2:'#F4FAF6'},sand:{n:'رملي',bg:'#F4EEE4',s2:'#FAF6F0'}};
 function bgKey(){try{return BGS[localStorage.getItem('qatta-bg')]?localStorage.getItem('qatta-bg'):'ivory'}catch(e){return'ivory'}}
 function applyBg(k){const b=BGS[k]||BGS.ivory,st=document.documentElement.style;st.setProperty('--bg',b.bg);st.setProperty('--surface2',b.s2);st.setProperty('--nav',b.bg+'D9');
   const m=document.querySelector('meta[name=theme-color]');if(m)m.content=b.bg;try{localStorage.setItem('qatta-bg',k)}catch(e){}}
 applyBg(bgKey());
+/* colour of cards, lists and sheets */
+const SURF={white:{n:'أبيض',c:'#FFFFFF'},cream:{n:'كريمي',c:'#FFFCF5'},pearl:{n:'لؤلؤي',c:'#F9F9FB'},mint:{n:'نعناعي',c:'#F4FAF6'},blush:{n:'وردي',c:'#FDF6F4'},sky:{n:'سماوي',c:'#F4F8FD'}};
+function surfKey(){try{return SURF[localStorage.getItem('qatta-surf')]?localStorage.getItem('qatta-surf'):'white'}catch(e){return'white'}}
+function applySurf(k){const v=(SURF[k]||SURF.white).c;document.documentElement.style.setProperty('--surface',v);try{localStorage.setItem('qatta-surf',k)}catch(e){}}
+applySurf(surfKey());
 const LSK='qatta-seen';const seen=()=>{try{return localStorage.getItem(LSK)==='1'}catch(e){return true}};const markSeen=()=>{try{localStorage.setItem(LSK,'1')}catch(e){}};
 
 /* ---------- storage ---------- */
@@ -824,9 +842,9 @@ let db=null,user=null,local=false,ro=false,note='',me={id:null,name:''},owner=fa
 let demo=null,realMe=null,realOwner=false;
 const SSK='qatta-demo';const ssGet=()=>{try{return sessionStorage.getItem(SSK)}catch(e){return null}};const ssSet=v=>{try{v?sessionStorage.setItem(SSK,v):sessionStorage.removeItem(SSK)}catch(e){}};
 const DIDK='qatta-demo-id';function demoId(){let v=null;try{v=localStorage.getItem(DIDK)}catch(e){}if(!v){v='demo-'+rid();try{localStorage.setItem(DIDK,v)}catch(e){}}return v}
-function enterDemo(id){if(demo)return;realMe=me;realOwner=owner;demo=id||demoId();ssSet(demo);me={...me,id:demo,name:'',isOwner:false};owner=false;render();window.scrollTo(0,0)}
+function enterDemo(id){if(demo)return;realMe=me;realOwner=owner;demo=id||demoId();ssSet(demo);me={...me,id:demo,name:'',isOwner:false};owner=false;render();SCR.scrollTop=0}
 function exitDemo(){if(!demo)return;
-  me=realMe;owner=realOwner;demo=null;ssSet(null);hud('رجعت لحسابك');render();window.scrollTo(0,0)}
+  me=realMe;owner=realOwner;demo=null;ssSet(null);hud('رجعت لحسابك');render();SCR.scrollTop=0}
 function demoBar(){return false?`<div class="demobar fade"><span><b>وضع التجربة</b>أنت الحين تشوف كأنك واحد من الربع فتح الرابط.</span><button class="mini" data-exitdemo>رجوع لحسابي</button></div>`:''}
 let dinners=[],peopleBy={},subs={},cur=null,sh=null,draft=null,armDel=false,rtok=0,lastN={N:{},A:{}},loaded=false;
 const q={};
@@ -925,7 +943,7 @@ async function home(tok){
     if(!done.length)return h+`<div class="empty fade"><h2>ما فيه قطّات منتهية</h2><p>أول ما يحوّل الكل في قطّة، تنتقل هنا.</p></div>`;
     return h+`<div class="group fade">`+done.map(d=>{const c=calc(ppl(d.id),d.by);let dt='';try{dt=new Date(d.until||d.at).toLocaleDateString(LOC(),{day:'numeric',month:'long'})}catch(e){}
       return `<a class="cell tap" href="#d-${esc(d.id)}" style="--indent:74px">${tile(d,44)}<span class="tx"><span>${esc(d.title)}</span><small>${esc(dt)} · ${P_(c.n,'شخص','شخصين','أشخاص')} · <span class="num">${fmt(c.t)} ر.س</span></small></span><span class="okc" style="font-size:14px">خلصت ✓</span>${I.chev}</a>`}).join('')+`</div>`}
-  if(!act.length)return h+`<div class="empty fade"><div style="display:flex;justify-content:center;margin-bottom:16px">${tile({cat:'other'},64)}</div><h2>ما عندك قطّات حالية</h2><p>اضغط "قطّة جديدة" تحت عشان تبدأ.</p></div>`;
+  if(!act.length)return h+`<div class="empty fade"><div class="appic sm">${I.logo}</div><h2>ما عندك قطّات حالية</h2><p>اضغط "قطّة جديدة" تحت عشان تبدأ.</p></div>`;
   const all=ds.flatMap(d=>ppl(d.id));lastN=await names(all);if(tok!==rtok)return null;
   act.sort((a,b)=>isPinned(b.id)-isPinned(a.id));
   return h+act.map(d=>{const ps=ppl(d.id),c=calc(ps,d.by),td=myTodo(d,ps);
@@ -1061,13 +1079,13 @@ async function detail(d,tok){
   detail.msg=P==='pay'?remind(d,c):P==='vote'?invite(d):shopMsg(d,c,host);
   return h;
 }
-function invite(d){const m=mapsShort(d),L=[`▫️ ${d.title}`];
+function invite(d){const m=mapsShort(d),L=[link(d.id),'',`▫️ ${d.title}`];
   if(d.until)L.push(`⏰ ينتهي التصويت ${tstr(d.until)}`);
   if(d.place)L.push(`📍 ${d.place}`);
   if(m)L.push(m);
-  L.push(link(d.id));return L.join('\n')}
-function shopMsg(d,c,host){return [`▫️ ${d.title}`,`🛒 ${host} يشتري الحين`,link(d.id)].join('\n')}
-function remind(d,c){return [`▫️ ${d.title}`,`💰 القطّة ${fmt(c.share)} ر.س`,link(d.id)].join('\n')}
+  return L.join('\n')}
+function shopMsg(d,c,host){return [link(d.id),'',`▫️ ${d.title}`,`🛒 ${host} يشتري الحين`].join('\n')}
+function remind(d,c){return [link(d.id),'',`▫️ ${d.title}`,`💰 القطّة ${fmt(c.share)} ر.س`].join('\n')}
 
 /* ---------- sheets ---------- */
 function shNav(title,save,saveTxt='حفظ',cancel='إلغاء'){return `<div class="shnav"><button class="nbtn" data-x>${cancel}</button><b>${title}</b>${save?`<button class="nbtn" id="${save}">${saveTxt}</button>`:'<span></span>'}</div>`}
@@ -1080,7 +1098,7 @@ const dlv=h=>new Date(Date.now()+h*3600e3-new Date().getTimezoneOffset()*60e3).t
 function sheetHtml(){
   if(!sh)return'';
   if(sh.kind==='welcome')return `<div class="shnav"><span></span><b></b><button class="nbtn" data-x>تم</button></div><div class="wel">
-    <div class="appic">${I.coins}</div><h2>أهلاً بك في القطّة</h2><p>تقسيم أي مصروف بين الربع، بدون لخبطة.</p>
+    <div class="appic">${I.logo}</div><h2>أهلاً بك في القطّة</h2><p>تقسيم أي مصروف بين الربع، بدون لخبطة.</p>
     <div class="feat"><span class="ico" style="background:#1F6F54">${I.people}</span><div><b>1. اجمع الأسماء</b><span>افتح قطّة وأرسل الرابط للقروب. كل واحد يضغط "أنا معكم" قبل ما يقفل التصويت.</span></div></div>
     <div class="feat"><span class="ico" style="background:#1F6F54">${I.cart}</span><div><b>2. اشترِ وسجّل</b><span>بعد ما يثبت العدد، صاحب القطّة يشتري ويكتب وش اشترى وبكم.</span></div></div>
     <div class="feat"><span class="ico" style="background:#1F6F54">${I.coins}</span><div><b>3. كل واحد يعرف وش عليه</b><span>التطبيق يقسم المبلغ، ويقول لكل واحد كم يحوّل ولمين، ويتابع مين حوّل.</span></div></div>
@@ -1144,8 +1162,8 @@ function showSugg(ix){return;hideSugg();const inp=sheet.querySelector(`[data-in=
   const el=document.createElement('div');el.className='sugg';el.dataset.for=ix;el.dataset.t=Date.now();
   el.innerHTML=list.map(x=>`<button type="button" data-opt="${esc(x)}">${esc(x)}</button>`).join('');inp.closest('.cell').after(el)}
 let sy=0;
-function lockScroll(){if(document.body.style.position==='fixed')return;sy=window.scrollY;document.body.style.cssText=`position:fixed;top:-${sy}px;left:0;right:0;width:100%;overflow:hidden`}
-function unlockScroll(){if(document.body.style.position!=='fixed')return;document.body.style.cssText='';window.scrollTo(0,sy)}
+function lockScroll(){SCR.style.overflowY='hidden'}
+function unlockScroll(){SCR.style.overflowY=''}
 function mapsShort(d){return d&&d.lat!=null&&d.lng!=null?`https://maps.google.com/?q=${d.lat},${d.lng}`:(d&&d.loc)||''}
 function locHref(d){if(d&&d.lat!=null&&d.lng!=null){return `https://www.google.com/maps/search/?api=1&query=${d.lat},${d.lng}`}return d&&d.loc||''}
 function gmLink(lat,lng){return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`}
@@ -1234,6 +1252,7 @@ function settingsPage(){const tk=themeKey();
   <p class="gf">اسمك وصورتك يشوفها ربعك في القطّات.</p>
   <div class="gh">اللغة</div><div class="group"><div class="seg2 in" role="radiogroup"><button data-lang="ar" class="${LANG==='ar'?'on':''}" aria-checked="${LANG==='ar'}">العربية</button><button data-lang="en" class="${LANG==='en'?'on':''}" aria-checked="${LANG==='en'}">English</button></div></div>
   <div class="gh">لون الخلفية</div><div class="group swatches">${Object.entries(BGS).map(([k,t])=>`<button class="sw ${k===bgKey()?'on':''}" data-bg-k="${k}" aria-pressed="${k===bgKey()}"><span class="bgs" style="background:${t.bg}">${k===bgKey()?I.check:''}</span>${t.n}</button>`).join('')}</div>
+  <div class="gh">لون القوائم والبطاقات</div><div class="group swatches s6">${Object.entries(SURF).map(([k,t])=>`<button class="sw ${k===surfKey()?'on':''}" data-surf-k="${k}" aria-pressed="${k===surfKey()}"><span class="bgs" style="background:${t.c}">${k===surfKey()?I.check:''}</span>${t.n}</button>`).join('')}</div>
   <div class="gh">اللون الأساسي</div><div class="group swatches">${Object.entries(THEMES).map(([k,t])=>`<button class="sw ${k===tk?'on':''}" data-theme-k="${k}" aria-pressed="${k===tk}"><span style="background:linear-gradient(150deg,${t.a[0]},${t.a[2]})">${k===tk?I.check:''}</span>${t.n}</button>`).join('')}</div>
   <div class="gh">مساعدة</div><div class="group"><button class="cell tap" data-help style="--indent:58px"><span class="ico">${I.people}</span><span class="tx">كيف يشتغل التطبيق</span>${I.chev}</button></div>
   <p class="note" style="margin-top:28px">القطّة · الإصدار 1.3</p>`}
@@ -1310,10 +1329,10 @@ const dref=()=>db.doc('dinners/'+cur);
 function setDinner(patch){const r=dref();queue(r.path,()=>r.update(patch));dinners=dinners.map(x=>x.id===cur?{...x,...patch}:x);render()}
 let io=null;
 /* nav: frosted as soon as anything scrolls under it; small title once the big one has passed */
-function navState(){const y=window.scrollY||document.documentElement.scrollTop||0,t=app.querySelector('.lt'),nb=nav.getBoundingClientRect().bottom;
+function navState(){const y=SCR.scrollTop||0,t=app.querySelector('.lt'),nb=nav.getBoundingClientRect().bottom;
   nav.classList.toggle('solid',y>2);nav.classList.toggle('titled',!!t&&t.getBoundingClientRect().bottom<nb+4)}
 function watchTitle(){navState()}
-window.addEventListener('scroll',navState,{passive:true});
+SCR.addEventListener('scroll',navState,{passive:true});
 function syncSubs(){
   const ids=new Set(dinners.map(d=>d.id));if(cur)ids.add(cur);
   for(const id of Object.keys(subs))if(!ids.has(id)){subs[id]();delete subs[id];delete peopleBy[id]}
@@ -1375,6 +1394,7 @@ app.addEventListener('click',e=>{
   if(b.hasAttribute('data-rmphoto')){setPhoto('');return}
   if(b.dataset.themeK){applyTheme(b.dataset.themeK);render();return}
   if(b.dataset.bgK){applyBg(b.dataset.bgK);render();return}
+  if(b.dataset.surfK){applySurf(b.dataset.surfK);render();return}
   if(b.dataset.lang){setLang(b.dataset.lang);return}
   if(b.hasAttribute('data-help')){openSheet({kind:'welcome'});return}
   if(b.hasAttribute('data-demo')){enterDemo();hud('صرت واحد من الربع');return}
@@ -1384,7 +1404,7 @@ app.addEventListener('click',e=>{
   if(b.dataset.go)vote(b.dataset.go==='1');
   else if(b.dataset.ht){homeTab=b.dataset.ht;render();return}
   else if(b.hasAttribute('data-editbuy')){const d=dinners.find(x=>x.id===cur),me2=ppl(cur).find(p=>p.uid===myUid()),k=d&&ppl(cur).some(p=>p.k===d.by)?d.by:me2&&me2.k;
-    const t=$('buys');if(t){const top=t.getBoundingClientRect().top+window.scrollY-70;window.scrollTo({top:Math.max(0,top),behavior:'smooth'})}else window.scrollTo({top:0,behavior:'smooth'});
+    const t=$('buys');if(t){const top=t.getBoundingClientRect().top-SCR.getBoundingClientRect().top+SCR.scrollTop-70;SCR.scrollTo({top:Math.max(0,top),behavior:'smooth'})}else SCR.scrollTo({top:0,behavior:'smooth'});
     if(k)setTimeout(()=>openSheet({kind:'items',k}),t?480:250)}
   else if(b.dataset.ph){const to=b.dataset.ph,d=dinners.find(x=>x.id===cur);setDinner(to==='shop'?{phase:'shop',until:Math.min(d.until||Date.now(),Date.now())}:{phase:to});hud(to==='pay'?'تم تقسيم المبلغ':to==='shop'?'تم قفل التصويت':'تم')}
   else if(b.dataset.ext){const d=dinners.find(x=>x.id===cur);setDinner({phase:'vote',until:Math.max(Date.now(),d.until||0)+3600e3});hud('تم التمديد ساعة')}
@@ -1472,7 +1492,7 @@ sheet.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='mn'){e.p
 veil.addEventListener('click',closeSheet);
 veil.addEventListener('touchmove',e=>e.preventDefault(),{passive:false});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&sh)closeSheet()});
-window.addEventListener('hashchange',()=>{armDel=false;if(sh&&sh.kind!=='welcome')closeSheet();render();window.scrollTo(0,0)});
+window.addEventListener('hashchange',()=>{armDel=false;if(sh&&sh.kind!=='welcome')closeSheet();render();SCR.scrollTop=0});
 
 /* ---------- keyboard return key: next / done ---------- */
 sheet.addEventListener('keydown',e=>{
