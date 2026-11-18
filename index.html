@@ -5,12 +5,29 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#F5F3EC">
 <title>القطّة</title>
+<meta name="description" content="قسّم المصروف مع ربعك بدون لخبطة: صوّت، اشترِ، وكل واحد يعرف وش عليه.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="القطّة">
+<meta property="og:title" content="القطّة">
+<meta property="og:description" content="قسّم المصروف مع ربعك بدون لخبطة: صوّت، اشترِ، وكل واحد يعرف وش عليه.">
+<meta property="og:url" content="https://meshal00010-boop.github.io/qatta/">
+<meta property="og:image" content="https://meshal00010-boop.github.io/qatta/og.png">
+<meta property="og:image:secure_url" content="https://meshal00010-boop.github.io/qatta/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="شعار القطّة">
+<meta property="og:locale" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="القطّة">
+<meta name="twitter:image" content="https://meshal00010-boop.github.io/qatta/og.png">
+<meta name="application-name" content="القطّة">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="القطّة">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="apple-touch-icon" href="icon-180.png">
-<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="manifest" href="manifest.json">
 <script src="config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -486,6 +503,34 @@ button:disabled{cursor:not-allowed}
 .swa.armed .swb{background:#8E2A21}.swa.armed .swl{color:var(--danger);font-weight:600}
 .swa:active .swb{filter:brightness(.9)}
 .pinmark{display:inline-flex;vertical-align:-2px;margin-inline-end:6px;color:#F29D38}.pinmark svg.i{width:15px;height:15px;stroke-width:2}
+/* sheet handle + expanded state */
+.shnav{touch-action:none;cursor:grab;padding-top:6px;height:62px}
+.shnav::before{top:8px;width:40px;height:5px;margin-left:-20px;background:rgba(18,33,26,.22)}
+.sheet.full{max-height:none;top:calc(env(safe-area-inset-top) + 10px)}
+.sheet.mapmode{display:flex;flex-direction:column;overflow:hidden;padding:0 0 env(safe-area-inset-bottom)}
+.sheet.mapmode .shnav{margin:0;padding:6px 16px 0;flex:none}
+.mbody{flex:1;display:flex;flex-direction:column;min-height:0}
+.mapmode .mapwrap{flex:1;position:relative;height:auto;margin:0;border-radius:0;border:0;box-shadow:none}
+.mtop{position:absolute;top:12px;left:12px;right:12px;z-index:700}
+.mtop .msearch{margin:0;box-shadow:var(--e2);border-radius:14px}
+.mclr{width:28px;height:28px;border-radius:50%;background:var(--fill);color:var(--ink2);font-size:18px;line-height:1}
+.mclr[hidden]{display:none}
+#mq::-webkit-search-cancel-button,#mq::-webkit-search-decoration{-webkit-appearance:none;appearance:none;display:none}
+.mtop .mres{margin-top:8px;max-height:46vh;box-shadow:var(--e2)}
+.mic{width:34px;height:34px;border-radius:50%;background:var(--danger-l);color:var(--danger);display:grid;place-items:center;flex:none}
+.mic svg.i{width:18px;height:18px}.mic.sm{width:30px;height:30px}
+.mpin i{display:block;width:10px;height:4px;border-radius:50%;background:rgba(0,0,0,.25);margin:-2px auto 0;transition:transform .15s}
+.mapwrap.moving .mpin i{transform:scale(1.6);opacity:.6}
+.mme{bottom:16px;left:16px;width:48px;height:48px;border-radius:14px;box-shadow:var(--e2)}
+.mme.busy svg{animation:pulse .9s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+.mcard{flex:none;background:var(--surface);border-top:1px solid var(--line);padding:14px 16px 16px;box-shadow:0 -8px 24px -18px rgba(14,40,30,.4)}
+.mrow{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.mrow .tx{flex:1;display:flex;flex-direction:column}.mrow b{font-weight:600;font-size:16px}.mrow small{color:var(--ink2);font-size:12px;direction:ltr;text-align:right}
+.mrm{display:block;margin:10px auto 0;color:var(--danger);font-size:14px;font-weight:500;min-height:32px}
+.leaflet-control-attribution{font-size:9px!important;background:rgba(255,255,255,.7)!important}
+.row-gh{display:flex;align-items:center;justify-content:space-between}
+.ghb{color:var(--emerald);font-weight:600;font-size:13px;min-height:28px;padding:0 4px}
 /* larger screens */
 @media (min-width:768px){
  main{padding-top:12px}
@@ -570,7 +615,7 @@ async function firebaseDB(cfg){
   const V='10.12.2',base='https://www.gstatic.com/firebasejs/'+V+'/';
   const [A,Au,F]=await Promise.all([import(base+'firebase-app.js'),import(base+'firebase-auth.js'),import(base+'firebase-firestore.js')]);
   const app=A.initializeApp(cfg),auth=Au.getAuth(app);
-  let fs;try{fs=F.initializeFirestore(app,{localCache:F.persistentLocalCache({tabManager:F.persistentMultipleTabManager()})})}catch(e){fs=F.getFirestore(app)}
+  let fs;try{fs=F.initializeFirestore(app,{ignoreUndefinedProperties:true,localCache:F.persistentLocalCache({tabManager:F.persistentMultipleTabManager()})})}catch(e){try{fs=F.initializeFirestore(app,{ignoreUndefinedProperties:true})}catch(_){fs=F.getFirestore(app)}}
   if(auth.authStateReady)await auth.authStateReady();
   const u=auth.currentUser||(await Au.signInAnonymously(auth)).user;
   const flat=(o,pre='',out={})=>{for(const k in o){const v=o[k];if(v&&typeof v==='object'&&!Array.isArray(v)&&Object.keys(v).length)flat(v,pre+k+'.',out);else out[pre+k]=v}return out};
@@ -594,10 +639,23 @@ function exitDemo(){if(!demo)return;
 function demoBar(){return false?`<div class="demobar fade"><span><b>وضع التجربة</b>أنت الحين تشوف كأنك واحد من الربع فتح الرابط.</span><button class="mini" data-exitdemo>رجوع لحسابي</button></div>`:''}
 let dinners=[],peopleBy={},subs={},cur=null,sh=null,draft=null,armDel=false,rtok=0,lastN={N:{},A:{}},loaded=false;
 const q={};
-function queue(path,fn){q[path]=(q[path]||Promise.resolve()).then(fn).catch(e=>{
-  if(e&&(e.code==='invalid_argument'||e.code==='permission-denied')){hud('ما عندك صلاحية لهذا',false)}
-  else if(e&&e.code==='quota_exceeded')hud('المساحة ممتلئة',false);
-  else hud('تعذّر الحفظ',false);render()});return q[path]}
+/* every write goes through here: one at a time per document, retried on network hiccups */
+const RETRY=new Set(['unavailable','deadline-exceeded','aborted','internal','resource-exhausted','resource_exhausted','cancelled','unknown']);
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+async function attempt(fn){let last;
+  for(let i=0;i<4;i++){
+    try{return await fn()}catch(e){last=e;const c=e&&e.code;
+      /* right after creating a pool the server may not see it yet: retry permission once */
+      const again=RETRY.has(c)||(c==='permission-denied'&&i===0)||(!c&&i<2);
+      if(!again)break;await wait([350,900,1800][i]||1800)}}
+  throw last}
+function saveError(e){const c=e&&e.code;console.warn('save failed',c,e);
+  if(c==='permission-denied'||c==='invalid_argument')return 'ما عندك صلاحية لهذا';
+  if(c==='quota_exceeded'||c==='resource-exhausted')return 'الخدمة مشغولة، جرّب بعد شوي';
+  if(c==='unavailable'||navigator.onLine===false)return 'ما فيه اتصال، تأكد من الإنترنت';
+  return 'تعذّر الحفظ، جرّب مرة ثانية'}
+function queue(path,fn){const run=(q[path]||Promise.resolve()).then(()=>attempt(fn));
+  q[path]=run.catch(e=>{hud(saveError(e),false);render()});return q[path]}
 const pcol=id=>db.collection('dinners/'+id+'/people');
 const pref=k=>pcol(cur).doc(k);
 const ppl=id=>peopleBy[id]||[];
@@ -787,7 +845,7 @@ async function detail(d,tok){
   /* receipt */
   const buyers=c.g.filter(p=>c.spent[p.k]>0);
   if(P!=='vote'&&buyers.length){
-    h+=`<div class="gh">المشتريات</div><div class="group">`+buyers.map(p=>(p.items||[]).map(i=>`<div class="cell"><span class="tx"><span>${esc(i.n||'مشتريات')}</span><small>${nm(p.k)}</small></span><span class="tr num">${fmt(i.p)} ر.س</span></div>`).join('')).join('')+`<div class="cell"><span class="tx" style="font-weight:600">المجموع</span><span class="num" style="font-weight:600">${fmt(c.t)} ر.س</span></div>${P==='pay'&&c.n?`<div class="cell"><span class="tx" style="color:var(--l2)">على كل واحد</span><span class="num" style="font-weight:600">${fmt(c.share)} ر.س</span></div>`:''}</div>`;
+    h+=`<div class="gh row-gh" id="buys"><span>المشتريات</span>${boss&&!ro?'<button class="ghb" data-editbuy>تعديل</button>':''}</div><div class="group">`+buyers.map(p=>(p.items||[]).map(i=>`<div class="cell"><span class="tx"><span>${esc(i.n||'مشتريات')}</span><small>${nm(p.k)}</small></span><span class="tr num">${fmt(i.p)} ر.س</span></div>`).join('')).join('')+`<div class="cell"><span class="tx" style="font-weight:600">المجموع</span><span class="num" style="font-weight:600">${fmt(c.t)} ر.س</span></div>${P==='pay'&&c.n?`<div class="cell"><span class="tx" style="color:var(--l2)">على كل واحد</span><span class="num" style="font-weight:600">${fmt(c.share)} ر.س</span></div>`:''}</div>`;
   }
 
   /* share */
@@ -802,7 +860,7 @@ async function detail(d,tok){
     if(P==='vote')rows.push(`<button class="cell tap act-row" data-ph="shop" style="--indent:58px"><span class="ico" style="background:#1F6F54">${I.lock}</span><span class="tx" style="color:var(--l1)">أقفل التصويت الحين<small>يثبت العدد ويبدأ الشراء</small></span></button>`);
     if(P!=='pay')rows.push(`<button class="cell tap" data-ext="1" style="--indent:58px"><span class="ico" style="background:#1F6F54">${I.plus1}</span><span class="tx">${P==='vote'?'مدّد التصويت ساعة':'أعد فتح التصويت ساعة'}</span></button>`);
     rows.push(`<button class="cell tap" data-add style="--indent:58px"><span class="ico" style="background:#1F6F54">${I.addp}</span><span class="tx">أضف شخص يدوياً<small>لشخص ما بيفتح الرابط</small></span></button>`);
-    if(P==='pay')rows.push(`<button class="cell tap" data-ph="shop" style="--indent:58px"><span class="ico" style="background:#1F6F54">${I.cart}</span><span class="tx">عدّل المشتريات</span></button>`);
+    if(P==='pay')rows.push(`<button class="cell tap" data-editbuy style="--indent:58px"><span class="ico" style="background:#1F6F54">${I.cart}</span><span class="tx">عدّل المشتريات</span></button>`);
     rows.push(`<button class="cell tap" data-editp style="--indent:58px"><span class="ico" style="background:#7C857F">${I.edit}</span><span class="tx">تعديل أو حذف القطّة</span>${I.chev}</button>`);
     h+=`<div class="gh">خيارات صاحب القطّة</div><div class="group">${rows.join('')}</div>`;
   }
@@ -848,12 +906,12 @@ function sheetHtml(){
     ${ed||me.name||local?'':`<div class="gh">اسمك</div><div class="group"><div class="cell"><input class="in-cell" id="nk2" placeholder="عشان يعرفونك في القروب"></div></div>`}
     ${ed?`<div class="group" style="margin-top:28px"><button class="cell tap danger" id="del" style="justify-content:center">${armDel?'متأكد؟ اضغط مرة ثانية للحذف':'احذف القطّة'}</button></div>`:''}`;
   }
-  if(sh.kind==='map')return `<div class="shnav"><button class="nbtn" id="mapBack">رجوع</button><b>اختر الموقع</b><button class="nbtn" id="mapOk">اختيار</button></div>
-    <label class="msearch">${I.search}<input id="mq" type="search" placeholder="ابحث عن مكان أو حي" enterkeyhint="search" autocomplete="off"></label>
-    <div class="group mres" id="mres" hidden></div>
-    <div class="mapwrap"><div id="map"></div><div class="mpin">${I.pinFill}</div><button type="button" class="mme" id="mme" aria-label="موقعي الحالي">${I.locate}</button></div>
-    <div class="group" style="margin-top:12px"><div class="cell"><span class="ico" style="background:#B4473A">${I.pin}</span><span class="tx"><b id="mpn" style="font-weight:600">جاري تحميل الخريطة…</b><small>حرّك الخريطة لين يصير الدبوس على المكان</small></span></div>
-    ${(sh.form&&(sh.form.lat!=null||sh.form.loc))?'<button class="cell tap danger" id="mapRm" style="justify-content:center">إزالة الموقع</button>':''}</div>`;
+  if(sh.kind==='map'){const has=sh.form&&(sh.form.lat!=null||sh.form.loc);return `<div class="shnav"><button class="nbtn" id="mapBack">إلغاء</button><b>اختر الموقع</b><span></span></div>
+    <div class="mbody"><div class="mapwrap"><div id="map"></div><div class="mpin">${I.pinFill}<i></i></div>
+      <div class="mtop"><label class="msearch">${I.search}<input id="mq" type="search" placeholder="ابحث عن مكان" enterkeyhint="search" autocomplete="off"><button type="button" class="mclr" id="mclr" hidden aria-label="مسح">×</button></label><div class="group mres" id="mres" hidden></div></div>
+      <button type="button" class="mme" id="mme" aria-label="موقعي الحالي">${I.locate}</button></div>
+    <div class="mcard"><div class="mrow"><span class="mic">${I.pin}</span><span class="tx"><b id="mpn">جاري تحميل الخريطة…</b><small id="mco" class="num">حرّك الخريطة لين يصير الدبوس على المكان</small></span></div>
+      <button class="pill pri wide" id="mapOk" disabled>${I.check} اختيار هذا الموقع</button>${has?'<button class="mrm" id="mapRm">إزالة الموقع</button>':''}</div></div>`}
   if(sh.kind==='name')return `<div class="shnav"><span></span><b></b>${me.name?'<button class="nbtn" data-x>إلغاء</button>':'<span></span>'}</div><div class="wel" style="padding-top:0">
     <div class="appic" style="width:72px;height:72px;margin-top:0">${I.person1}</div><h2>وش اسمك؟</h2><p>عشان يعرفك ربعك في القطّات.</p></div>
     <div class="group"><div class="cell"><input class="in-cell" id="myname" enterkeyhint="done" autocomplete="name" placeholder="اسمك" value="${esc(me.name||'')}"></div></div>
@@ -903,34 +961,66 @@ function openSheet(s){sh=s;lockScroll();armDel=false;
   sheet.innerHTML=sheetHtml();sheet.scrollTop=0;sheet.classList.add('on');veil.classList.add('on');
   if(s.kind==='add'||s.kind==='new'){const f=sheet.querySelector('#mn,#ti');f&&setTimeout(()=>f.focus(),350)}
 }
-function closeSheet(){if(MAP){MAP.remove();MAP=null}const wasWel=sh&&sh.kind==='welcome';if(wasWel)markSeen();if(sh&&sh.kind==='name'&&!me.name)return;if(wasWel&&!me.name)setTimeout(()=>openSheet({kind:'name'}),380);unlockScroll();sh=null;draft=null;sheet.classList.remove('on');veil.classList.remove('on')}
+function closeSheet(){if(MAP){MAP.remove();MAP=null}sheet.classList.remove('full','mapmode');sheet.style.transform='';veil.style.opacity='';const wasWel=sh&&sh.kind==='welcome';if(wasWel)markSeen();if(sh&&sh.kind==='name'&&!me.name)return;if(wasWel&&!me.name)setTimeout(()=>openSheet({kind:'name'}),380);unlockScroll();sh=null;draft=null;sheet.classList.remove('on');veil.classList.remove('on')}
 function reSheet(sel){const st=sheet.scrollTop;sheet.innerHTML=sheetHtml();sheet.scrollTop=st;const el=sel&&sheet.querySelector(sel);el&&el.focus()}
+
+/* ---------- drag a sheet: down to close, up to expand ---------- */
+function dismissSheet(){if(sh&&sh.kind==='map')closeMap(false);else closeSheet()}
+let sdr=null;
+function sdStart(y,t){if(!sh)return;if(t.closest('input,textarea,select,.mapwrap,.mres,.sugg,.mcard'))return;
+  const onHandle=!!t.closest('.shnav');if(t.closest('button,a')&&!onHandle)return;if(t.closest('button')&&onHandle)return;
+  if(!onHandle&&sheet.scrollTop>0)return;if(sh.kind==='map'&&!onHandle)return;
+  sdr={y0:y,t0:Date.now(),dy:0,on:false,handle:onHandle,h:sheet.offsetHeight}}
+function sdMove(y,ev){if(!sdr)return false;const dy=y-sdr.y0;
+  if(!sdr.on){if(Math.abs(dy)<6)return false;if(!sdr.handle&&dy<0){sdr=null;return false}sdr.on=true;sheet.style.transition='none';veil.style.transition='none'}
+  ev&&ev.cancelable&&ev.preventDefault();sdr.dy=dy;
+  const t=dy>0?dy:dy/4;sheet.style.transform=`translateY(${t}px)`;veil.style.opacity=String(Math.max(0,1-Math.max(0,dy)/sdr.h));return true}
+function sdEnd(){if(!sdr)return;const s2=sdr;sdr=null;sheet.style.transition='';veil.style.transition='';if(!s2.on)return;
+  const v=s2.dy/Math.max(1,Date.now()-s2.t0);
+  if(s2.dy>Math.min(140,s2.h*.3)||(v>.6&&s2.dy>30)){const keep=sh&&sh.kind==='name'&&!me.name;sheet.style.transform='';veil.style.opacity='';if(!keep)dismissSheet();return}
+  if(s2.dy<-50)sheet.classList.add('full');
+  sheet.style.transform='';veil.style.opacity=''}
+sheet.addEventListener('touchstart',e=>sdStart(e.touches[0].clientY,e.target),{passive:true});
+sheet.addEventListener('touchmove',e=>{sdMove(e.touches[0].clientY,e)},{passive:false});
+sheet.addEventListener('touchend',sdEnd);sheet.addEventListener('touchcancel',sdEnd);
+sheet.addEventListener('mousedown',e=>{sdStart(e.clientY,e.target);if(sdr)e.preventDefault()});
+window.addEventListener('mousemove',e=>{if(sdr)sdMove(e.clientY,null)});
+window.addEventListener('mouseup',sdEnd);
 
 /* ---------- map picker (OpenStreetMap) ---------- */
 let LP=null,MAP=null,mGeo=null,mName='',mT=null,sT=null,mLock=false;
 function loadLeaflet(){if(window.L)return Promise.resolve(window.L);if(LP)return LP;LP=new Promise((res,rej)=>{const c=document.createElement('link');c.rel='stylesheet';c.href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';document.head.appendChild(c);const sc=document.createElement('script');sc.src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';sc.onload=()=>res(window.L);sc.onerror=()=>{LP=null;rej()};document.head.appendChild(sc)});return LP}
 function readForm(){const d=sh.kind==='edit'?dinners.find(x=>x.id===cur)||{}:{},F=sh.form||{},v=id=>{const e=$(id);return e?e.value:undefined};
   return{...F,title:v('ti')??F.title,place:v('pl')??F.place,until:v('until')??F.until,lat:F.lat!==undefined?F.lat:d.lat,lng:F.lng!==undefined?F.lng:d.lng,loc:F.loc!==undefined?F.loc:d.loc}}
-async function openMap(){sh.form=readForm();sh.back=sh.kind;sh.kind='map';reSheet();
+async function openMap(){sh.form=readForm();sh.back=sh.kind;sh.kind='map';sheet.classList.add('full','mapmode');reSheet();
   try{const L=await loadLeaflet();if(!sh||sh.kind!=='map')return;const f=sh.form,has=f.lat!=null;
-    MAP=L.map('map',{zoomControl:false,attributionControl:true}).setView(has?[f.lat,f.lng]:[24.7136,46.6753],has?16:11);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(MAP);
-    MAP.on('movestart',()=>{const w=sheet.querySelector('.mapwrap');w&&w.classList.add('moving')});
+    MAP=L.map('map',{zoomControl:false,attributionControl:true,tap:false}).setView(has?[f.lat,f.lng]:[24.7136,46.6753],has?17:11);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{maxZoom:20,subdomains:'abcd',attribution:'© OpenStreetMap © CARTO'}).addTo(MAP);
+    MAP.attributionControl.setPrefix(false);
+    MAP.on('movestart',()=>{const w=sheet.querySelector('.mapwrap');w&&w.classList.add('moving');const ok=$('mapOk');if(ok)ok.disabled=true});
     MAP.on('moveend',()=>{const w=sheet.querySelector('.mapwrap');w&&w.classList.remove('moving');onMapMove()});
+    /* the sheet slides in, so the map must re-measure once it has settled */
+    [120,450,900].forEach(t=>setTimeout(()=>MAP&&MAP.invalidateSize(),t));
     onMapMove();if(!has)locateMe(true);
   }catch(e){const n=$('mpn');if(n)n.textContent='تعذّر تحميل الخريطة، تأكد من الإنترنت'}}
-function onMapMove(){if(!MAP)return;const c=MAP.getCenter();mGeo={lat:+c.lat.toFixed(6),lng:+c.lng.toFixed(6)};const n=$('mpn');
-  if(mLock){mLock=false;if(n)n.textContent=mName;return}if(n)n.textContent='…';
-  clearTimeout(mT);mT=setTimeout(async()=>{try{const r=await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${mGeo.lat}&lon=${mGeo.lng}&zoom=17&accept-language=ar`);const j=await r.json(),a=j.address||{};
-    mName=j.name||a.neighbourhood||a.suburb||a.road||a.village||a.town||a.city||(j.display_name||'').split(',')[0]||'';const n2=$('mpn');if(n2)n2.textContent=mName||'موقع محدد'}catch(e){const n2=$('mpn');if(n2)n2.textContent='موقع محدد'}},700)}
+function onMapMove(){if(!MAP)return;const c=MAP.getCenter();mGeo={lat:+c.lat.toFixed(6),lng:+c.lng.toFixed(6)};const n=$('mpn'),co=$('mco'),ok=$('mapOk');
+  if(co)co.textContent=mGeo.lat.toFixed(5)+', '+mGeo.lng.toFixed(5);if(ok)ok.disabled=false;
+  if(mLock){mLock=false;if(n)n.textContent=mName;return}if(n)n.textContent='جاري تحديد المكان…';mName='';
+  clearTimeout(mT);const at={...mGeo};mT=setTimeout(async()=>{try{const r=await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${at.lat}&lon=${at.lng}&zoom=18&accept-language=ar`);const j=await r.json(),a=j.address||{};
+    if(!mGeo||mGeo.lat!==at.lat||mGeo.lng!==at.lng)return;
+    mName=j.name||a.neighbourhood||a.suburb||a.road||a.village||a.town||a.city||(j.display_name||'').split(/[,،]/)[0]||'';const n2=$('mpn');if(n2)n2.textContent=mName||'موقع محدد'}catch(e){const n2=$('mpn');if(n2)n2.textContent='موقع محدد'}},600)}
+let meDot=null;
 function locateMe(silent){if(!navigator.geolocation){if(!silent)hud('جوالك ما يدعم تحديد الموقع',false);return}
-  navigator.geolocation.getCurrentPosition(p=>{MAP&&MAP.setView([p.coords.latitude,p.coords.longitude],16)},()=>{if(!silent)hud('اسمح بالوصول للموقع من الإعدادات',false)},{enableHighAccuracy:true,timeout:10000,maximumAge:60000})}
-function searchPlaces(q){clearTimeout(sT);const box=$('mres');if(!q.trim()){if(box)box.hidden=true;return}
+  const b=$('mme');b&&b.classList.add('busy');
+  navigator.geolocation.getCurrentPosition(p=>{b&&b.classList.remove('busy');if(!MAP)return;const ll=[p.coords.latitude,p.coords.longitude];
+    if(meDot)meDot.remove();meDot=window.L.circleMarker(ll,{radius:8,weight:3,color:'#fff',fillColor:'#2F6FED',fillOpacity:1}).addTo(MAP);
+    MAP.setView(ll,17)},()=>{b&&b.classList.remove('busy');if(!silent)hud('اسمح بالوصول للموقع من الإعدادات',false)},{enableHighAccuracy:true,timeout:12000,maximumAge:0})}
+function searchPlaces(q){clearTimeout(sT);const box=$('mres'),clr=$('mclr');if(clr)clr.hidden=!q;if(!q.trim()){if(box)box.hidden=true;return}
   sT=setTimeout(async()=>{try{const c=MAP?MAP.getCenter():{lat:24.7,lng:46.7},vb=[c.lng-1.5,c.lat+1.5,c.lng+1.5,c.lat-1.5].join(',');
     const r=await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=6&accept-language=ar&countrycodes=sa&viewbox=${vb}&q=${encodeURIComponent(q)}`);const L=await r.json();const b=$('mres');if(!b)return;
-    b.innerHTML=L.length?L.map(x=>`<button class="cell tap" data-res="${x.lat},${x.lon}" data-nm="${esc(x.name||x.display_name.split(/[,،]/)[0])}"><span class="tx"><span>${esc(x.name||x.display_name.split(/[,،]/)[0])}</span><small>${esc(x.display_name.split(/[,،]/).slice(1,3).join('،'))}</small></span></button>`).join(''):'<div class="cell"><span class="tx"><small>ما لقينا شي بهالاسم</small></span></div>';b.hidden=false}catch(e){}},600)}
-function closeMap(save){if(MAP){MAP.remove();MAP=null}
-  if(save===true&&mGeo){sh.form.lat=mGeo.lat;sh.form.lng=mGeo.lng;sh.form.loc=gmLink(mGeo.lat,mGeo.lng);if(!(sh.form.place||'').trim()&&mName)sh.form.place=mName}
+    b.innerHTML=L.length?L.map(x=>{const nm=x.name||x.display_name.split(/[,،]/)[0];return `<button class="cell tap" data-res="${x.lat},${x.lon}" data-nm="${esc(nm)}"><span class="mic sm">${I.pin}</span><span class="tx"><span>${esc(nm)}</span><small>${esc(x.display_name.split(/[,،]/).slice(1,3).join('،'))}</small></span></button>`}).join(''):'<div class="cell"><span class="tx"><small>ما لقينا شي بهالاسم</small></span></div>';b.hidden=false}catch(e){}},500)}
+function closeMap(save){if(MAP){MAP.remove();MAP=null}meDot=null;sheet.classList.remove('full','mapmode');
+  if(save===true&&mGeo){sh.form.lat=mGeo.lat;sh.form.lng=mGeo.lng;sh.form.loc=gmLink(mGeo.lat,mGeo.lng);if(mName)sh.form.place=(sh.form.place||'').trim()||mName;hud('تم تحديد الموقع')}
   if(save==='rm'){sh.form.lat=null;sh.form.lng=null;sh.form.loc=''}
   sh.kind=sh.back||'new';reSheet()}
 async function saveName(){const v=(($('myname')||{}).value||'').trim();if(!v){$('myname').focus();hud('اكتب اسمك',false);return}
@@ -1039,7 +1129,8 @@ function togglePay(f,t){const p=ppl(cur).find(x=>x.k===f);if(!p)return;const val
 /* the phone's own share menu; WhatsApp is the fallback where the menu isn't available */
 function sendText(text){return shareMsg(text)}
 async function shareMsg(t){const text=t||detail.msg||'';
-  if(navigator.share){try{await navigator.share({text});return}catch(e){if(e&&e.name==='AbortError')return}}
+  const m=text.match(/https?:\/\/\S+$/),url=m?m[0]:APP_URL,body=m?text.slice(0,m.index).trim():text;
+  if(navigator.share){try{await navigator.share({title:'القطّة',text:body,url});return}catch(e){if(e&&e.name==='AbortError')return}}
   const a=document.createElement('a');a.href='https://wa.me/?text='+encodeURIComponent(text);a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove()}
 async function copy(t,ok='تم النسخ'){try{await navigator.clipboard.writeText(String(t));hud(ok)}catch(e){hud('تعذّر النسخ',false)}}
 
@@ -1054,6 +1145,9 @@ app.addEventListener('click',e=>{
   if(b.hasAttribute('data-votes')){openSheet({kind:'votes'});return}
   if(b.hasAttribute('data-editp')){const d=dinners.find(x=>x.id===cur);openSheet({kind:'edit',cat:(d&&d.cat)||'dinner'});return}
   if(b.dataset.go)vote(b.dataset.go==='1');
+  else if(b.hasAttribute('data-editbuy')){const d=dinners.find(x=>x.id===cur),me2=ppl(cur).find(p=>p.uid===myUid()),k=d&&ppl(cur).some(p=>p.k===d.by)?d.by:me2&&me2.k;
+    const t=$('buys');if(t){const top=t.getBoundingClientRect().top+window.scrollY-70;window.scrollTo({top:Math.max(0,top),behavior:'smooth'})}else window.scrollTo({top:0,behavior:'smooth'});
+    if(k)setTimeout(()=>openSheet({kind:'items',k}),t?480:250)}
   else if(b.dataset.ph){const to=b.dataset.ph,d=dinners.find(x=>x.id===cur);setDinner(to==='shop'?{phase:'shop',until:Math.min(d.until||Date.now(),Date.now())}:{phase:to});hud(to==='pay'?'تم تقسيم المبلغ':to==='shop'?'تم قفل التصويت':'تم')}
   else if(b.dataset.ext){const d=dinners.find(x=>x.id===cur);setDinner({phase:'vote',until:Math.max(Date.now(),d.until||0)+3600e3});hud('تم التمديد ساعة')}
   else if(b.hasAttribute('data-req'))request();
@@ -1087,6 +1181,7 @@ sheet.addEventListener('click',e=>{
   if(b.id==='mapOk'){if(!mGeo){hud('الخريطة تتحمّل',false);return}closeMap(true);return}
   if(b.id==='mapRm'){closeMap('rm');return}
   if(b.id==='mme'){locateMe(false);return}
+  if(b.id==='mclr'){const q=$('mq');q.value='';searchPlaces('');q.focus();return}
   if(b.dataset.res){const [la,lo]=b.dataset.res.split(',').map(Number);mName=b.dataset.nm||'';mLock=true;MAP&&MAP.setView([la,lo],16);const bx=$('mres');bx.hidden=true;const q=$('mq');q&&q.blur();return}
   if(b.id==='svName'){saveName();return}
   if(b.dataset.h){$('until').value=tvIn(+b.dataset.h);$('uhint').textContent=uhint($('until').value);sheet.querySelectorAll('[data-h]').forEach(x=>x.classList.toggle('sel',x===b));return}
