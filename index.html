@@ -548,6 +548,26 @@ button:disabled{cursor:not-allowed}
 .sw.on{color:var(--ink);font-weight:600}.sw.on span{box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--emerald)}
 .sw:active span{transform:scale(.92)}
 .help svg.i{display:block}
+/* tab bar */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:6;display:grid;grid-template-columns:1fr 1fr;padding:6px 0 calc(6px + env(safe-area-inset-bottom));background:var(--nav);-webkit-backdrop-filter:saturate(170%) blur(20px);backdrop-filter:saturate(170%) blur(20px);box-shadow:0 -1px 0 var(--line)}
+.tabbar[hidden]{display:none}
+.tabbar a{display:flex;flex-direction:column;align-items:center;gap:3px;min-height:48px;justify-content:center;color:var(--ink3);font-size:11px;transition:color .15s}
+.tabbar a b{font-weight:600}
+.tabbar a.on{color:var(--emerald)}
+.tabbar .ti svg.i{width:25px;height:25px}
+.tabbar a:active .ti{transform:scale(.9)}
+body.has-tabs main{padding-bottom:calc(170px + env(safe-area-inset-bottom))}
+body.has-tabs .fab{bottom:calc(76px + env(safe-area-inset-bottom))}
+/* segmented filter */
+.seg2{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;margin:0 0 18px;background:rgba(118,118,128,.1);border-radius:13px}
+.seg2 button{min-height:38px;border-radius:10px;font-size:14px;font-weight:600;color:var(--ink2);display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:background .2s var(--ease),color .2s,box-shadow .2s}
+.seg2 button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08),0 2px 8px -4px rgba(0,0,0,.12)}
+.seg2 button i{font-style:normal;font-size:12px;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--emerald-l);color:var(--emerald);display:inline-grid;place-items:center}
+.seg2.in{margin:12px;background:rgba(118,118,128,.1)}
+.sw .bgs{box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)!important;color:var(--ink)!important}
+.sw.on .bgs{box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--emerald)!important}
+[dir=ltr] .chev,[dir=ltr] #back svg,[dir=ltr] .big-amt .who svg{transform:scaleX(-1)}
+[dir=ltr] body{font-family:-apple-system,"SF Pro Text","IBM Plex Sans Arabic",system-ui,sans-serif}
 /* larger screens */
 @media (min-width:768px){
  main{padding-top:12px}
@@ -566,6 +586,7 @@ button:disabled{cursor:not-allowed}
 </div></header>
 <main id="app"><h1 class="lt">القطّات</h1></main>
 <div class="fab" id="fab"><button class="pill pri wide" data-new>+ قطّة جديدة</button></div>
+<nav class="tabbar" id="tabbar" aria-label="التنقل"><a href="#" data-tab="home" class="on"><span class="ti" id="tiHome"></span><b>الرئيسية</b></a><a href="#settings" data-tab="acct"><span class="ti" id="tiAcct"></span><b>الحساب</b></a></nav>
 <div class="veil" id="veil"></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
 <div class="hud" id="hud" role="status"></div>
@@ -610,6 +631,7 @@ const I={
   pinT:'<svg class="i" viewBox="0 0 24 24"><path d="M12 17v5"/><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/></svg>',
   gear:'<svg class="i" viewBox="0 0 24 24" style="width:19px;height:19px"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>',
   camera:'<svg class="i" viewBox="0 0 24 24" style="width:17px;height:17px"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>',
+  homeI:'<svg class="i" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>',
   edit:'<svg class="i" viewBox="0 0 24 24"><path d="M21.17 6.81a1 1 0 0 0-3.99-3.99L3.84 16.17a2 2 0 0 0-.5.83l-1.32 4.35a.5.5 0 0 0 .62.62l4.35-1.32a2 2 0 0 0 .83-.5z"/><path d="m15 5 4 4"/></svg>'
 };
 const CATS={dinner:{n:'وجبة',c:['#1F6F54','#1F6F54'],ic:'dish'},outing:{n:'كشتة',c:['#1F6F54','#1F6F54'],ic:'fire'},trip:{n:'رحلة',c:['#1F6F54','#1F6F54'],ic:'car'},gift:{n:'هدية',c:['#1F6F54','#1F6F54'],ic:'gift'},other:{n:'أخرى',c:['#1F6F54','#1F6F54'],ic:'coins'}};
@@ -618,6 +640,137 @@ const tile=(d,size)=>{const k=cat(d);return `<span class="tile" style="backgroun
 const PAL=[['#B9A77A','#B9A77A'],['#7E9C8C','#7E9C8C'],['#C9906B','#C9906B'],['#8C8FA8','#8C8FA8'],['#A88E9E','#A88E9E'],['#6F9A9C','#6F9A9C'],['#B5956A','#B5956A'],['#8BA07A','#8BA07A'],['#9C8576','#9C8576']];
 const hue=k=>{let h=0;for(const ch of String(k))h=(h*31+ch.charCodeAt(0))>>>0;return PAL[h%PAL.length]};
 let hudT;function hud(t,ok=true){const h=$('hud');h.innerHTML=(ok?I.check:'')+esc(t);h.classList.add('on');clearTimeout(hudT);hudT=setTimeout(()=>h.classList.remove('on'),1400)}
+/* ---------- language: Arabic is the source; English is applied to whatever is on screen ---------- */
+let LANG=(()=>{try{return localStorage.getItem('qatta-lang')==='en'?'en':'ar'}catch(e){return'ar'}})();
+const LOC=()=>LANG==='en'?'en-US':'ar-u-nu-latn';
+const EN={
+'القطّات':'Pools','القطّة':'Qatta','الحساب':'Account','الرئيسية':'Home','قطّة جديدة':'New pool','+ قطّة جديدة':'+ New pool',
+'القطّات الحالية':'Current','القطّات المنتهية':'Finished','قطّاتك مع الربع':'Your pools with friends',
+'ما عندك قطّات حالية':'No current pools','اضغط "قطّة جديدة" تحت عشان تبدأ.':'Tap "New pool" below to start.',
+'ما فيه قطّات منتهية':'No finished pools','أول ما يحوّل الكل في قطّة، تنتقل هنا.':'Once everyone has paid, a pool moves here.',
+'خلصت ✓':'Done ✓','خلصت':'Done','التصويت مفتوح':'Voting open','صوّت الحين':'Vote now','أنت معهم':"You're in",'قلت ما تقدر':"You said no",
+'اشترِ وسجّل':'Buy & log it','اقسم المبلغ':'Split the bill','ننتظر الشراء':'Waiting for purchase','مرحلة الدفع':'Paying','خالص':'Settled',
+'ما أحد للحين':'No one yet','جاري التحميل…':'Loading…','جاري الاتصال…':'Connecting…','تعذّر تحميل البيانات.':"Couldn't load data.",
+'نسخة تجربة: البيانات محفوظة على هذا الجهاز بس.':'Demo copy: data is saved on this device only.',
+'مشاركة':'Share','حذف':'Delete','إزالة':'Remove','تثبيت':'Pin','إلغاء التثبيت':'Unpin','متأكد؟':'Sure?',
+'نجمع الأسماء':'Collecting names','الشراء':'Buying','الدفع':'Paying',
+'خطوتك الحين':'Your step','ننتظر':'Waiting','للعلم':'Note','تم':'Done','تصويت':'Vote','نتيجة التصويت':'Vote result',
+'مين معنا؟':"Who's in?",'مين معك؟':"Who's with you?",'معكم':"I'm in",'أعتذر':"Can't make it",'عرض الأصوات':'See votes',
+'مشاركة التصويت':'Share vote','مشاركة التحديث':'Share update','مشاركة التذكير':'Share reminder','ذكّرهم':'Remind them',
+'تقدر تشوف بس':'View only','سجّل دخولك':'Sign in','عشان تقدر تقول إنك معهم.':"so you can say you're in.",
+'اكتب اسمك قبل ما تصوّت':'Type your name before voting','اكتب اسمك':'Type your name','اسمك':'Your name','اسمه':'Their name',
+'التصويت مقفل':'Voting closed','اطلب الانضمام':'Ask to join','ما انقبل طلبك':'Your request was declined',
+'اشترِ وسجّل المشتريات هنا.':'Buy and log purchases here.','سجّل المشتريات':'Log purchases','أضف مشتريات':'Add purchases',
+'دفعت شي من جيبك؟ سجّله':'Paid for something? Log it','تعديل اللي دفعته':'Edit what you paid',
+'حوّلت':'I paid','أكّد':'Confirm','حوّل':'Paid','ما حوّل':'Not paid','نسخ':'Copy','المبلغ':'Amount',
+'وعندك تحويلات ثانية تحت.':'You have more transfers below.','وصلك المبلغ كامل':"You've been paid in full",
+'ما عليك شي':'You owe nothing','حوّلت، شكراً':'Paid, thanks','القطّة خلصت':'Pool finished','القطّة في مرحلة الدفع':'Pool is in the paying step',
+'طلبات انضمام':'Join requests','بعد قفل التصويت':'After voting closed','قبول':'Accept','رفض':'Decline',
+'المشاركون':'People','المشتريات':'Purchases','المجموع':'Total','على كل واحد':'Each person','تعديل':'Edit','شارك':'Share',
+'نسخ رابط القطّة':'Copy pool link','خيارات صاحب القطّة':'Owner options','أقفل التصويت الحين':'Close voting now','يثبت العدد ويبدأ الشراء':'Locks the headcount and starts buying',
+'مدّد التصويت ساعة':'Extend voting 1 hour','أعد فتح التصويت ساعة':'Reopen voting 1 hour','أضف شخص يدوياً':'Add someone manually','لشخص ما بيفتح الرابط':"For someone who won't open the link",
+'عدّل المشتريات':'Edit purchases','تعديل أو حذف القطّة':'Edit or delete pool','أنت صاحب القطّة':'You own this pool','صاحب القطّة':'Pool owner',
+'ما لقينا هالقطّة':"Pool not found",'يمكن انحذفت.':'It may have been deleted.','رجوع':'Back','إلغاء':'Cancel','حفظ':'Save','إنشاء':'Create','إضافة':'Add','إغلاق':'Close',
+'النوع':'Type','الاسم':'Name','اسم القطّة':'Pool name','المكان (اختياري)':'Place (optional)','الموقع':'Location','متى يقفل التصويت؟':'When does voting close?',
+'بعد ساعة':'In 1 hour','بعد ساعتين':'In 2 hours','بعد 3 ساعات':'In 3 hours','الساعة':'Time','عشان يعرفونك في القروب':'So the group knows you',
+'بعد ما يقفل التصويت، محد يدخل إلا إذا وافقت عليه.':'After voting closes, nobody joins unless you approve.',
+'وجبة':'Meal','كشتة':'Outing','رحلة':'Trip','هدية':'Gift','أخرى':'Other',
+'أضف شخص':'Add person','وش اشتريت؟':'What did you buy?','مشترياتي':'My purchases','السعر':'Price','+ أضف غرض':'+ Add item','ر.س':'SAR',
+'رقم حسابك أو جوالك':'Your IBAN or phone','يظهر لربعك عشان يحوّلون عليه.':'Shown to friends so they can pay you.','إزالة من القطّة':'Remove from pool',
+'التحويل':'Transfer','حساب':'Account','ما أضاف رقم حساب':'No account added','إلغاء التأكيد':'Undo','أكّد إنه حوّل':'Confirm they paid',
+'الأصوات':'Votes','ما أحد صوّت للحين.':'No votes yet.','أنت':'You',
+'اختر الموقع':'Pick location','ابحث عن مكان':'Search places','خريطة':'Map','قمر صناعي':'Satellite','اختيار هذا الموقع':'Use this location','إزالة الموقع':'Remove location',
+'جاري تحميل الخريطة…':'Loading map…','جاري تحديد المكان…':'Finding place…','موقع محدد':'Pinned location','حرّك الخريطة لين يصير الدبوس على المكان':'Move the map to put the pin on the place',
+'ما لقينا شي بهالاسم':'No results','تعذّر تحميل الخريطة، تأكد من الإنترنت':"Couldn't load the map, check your connection",
+'وش اسمك؟':"What's your name?",'عشان يعرفك ربعك في القطّات.':'So your friends know you in pools.','أهلاً بك في القطّة':'Welcome to Qatta',
+'تقسيم أي مصروف بين الربع، بدون لخبطة.':'Split any expense with friends, no mess.',
+'1. اجمع الأسماء':'1. Collect names','2. اشترِ وسجّل':'2. Buy and log','3. كل واحد يعرف وش عليه':'3. Everyone knows what they owe',
+'افتح قطّة وأرسل الرابط للقروب. كل واحد يضغط "أنا معكم" قبل ما يقفل التصويت.':'Open a pool and share the link. Everyone taps "I\'m in" before voting closes.',
+'بعد ما يثبت العدد، صاحب القطّة يشتري ويكتب وش اشترى وبكم.':'Once the headcount is set, the owner buys and logs what was bought and for how much.',
+'التطبيق يقسم المبلغ، ويقول لكل واحد كم يحوّل ولمين، ويتابع مين حوّل.':'The app splits the bill, tells everyone who to pay and how much, and tracks who paid.',
+'يلا نبدأ':"Let's go",'اسمك وصورتك وشكل التطبيق':'Your name, photo and look','الملف الشخصي':'Profile','تغيير الصورة':'Change photo',
+'اسمك وصورتك يشوفها ربعك في القطّات.':'Friends see your name and photo in pools.','اللغة':'Language','لون الخلفية':'Background','اللون الأساسي':'Main colour',
+'عاجي':'Ivory','أبيض':'White','رمادي':'Grey','نعناعي':'Mint','رملي':'Sand','زمردي':'Emerald','كحلي':'Navy','بنفسجي':'Plum','قهوة':'Coffee','فحمي':'Charcoal',
+'مساعدة':'Help','كيف يشتغل التطبيق':'How it works','القطّة · الإصدار 1.3':'Qatta · version 1.3',
+'تم الحفظ':'Saved','تمت الإضافة':'Added','تمت الإزالة':'Removed','تم الحذف':'Deleted','تم القبول':'Accepted','تم النسخ':'Copied','تم نسخ الرابط':'Link copied',
+'تعذّر النسخ':"Couldn't copy",'تم، شكراً':'Done, thanks','تم التثبيت':'Pinned','تم إلغاء التثبيت':'Unpinned','تم تقسيم المبلغ':'Bill split','تم قفل التصويت':'Voting closed',
+'تم التمديد ساعة':'Extended 1 hour','تم تحديد الموقع':'Location set','تم تغيير الصورة':'Photo changed','تمت إزالة الصورة':'Photo removed','وصل طلبك':'Request sent',
+'ما عندك صلاحية لهذا':"You don't have permission",'الخدمة مشغولة، جرّب بعد شوي':'Service busy, try again shortly','ما فيه اتصال، تأكد من الإنترنت':'No connection, check your internet',
+'تعذّر الحفظ، جرّب مرة ثانية':"Couldn't save, try again",'اختر الساعة':'Pick a time','سجّل دخول':'Sign in','الخريطة تتحمّل':'Map is loading',
+'جوالك ما يدعم تحديد الموقع':"Your phone can't share location",'اسمح بالوصول للموقع من الإعدادات':'Allow location access in Settings','ما قدرنا نقرأ الصورة':"Couldn't read the image",
+'التصويت يقفل بعد':'Voting closes in','قطّة':'Pool','ضيف':'Guest','دفع أكثر من نصيبه':'paid more than their share','نوع الخريطة':'Map type','موقعي الحالي':'My location','مسح':'Clear',
+'الإعدادات':'Settings','(أنت)':'(you)','SA… أو 05…':'SA… or 05…','؟':'?','وصلك':'Received','من':'of','صوت واحد':'1 vote','صوتين':'2 votes','التنقل':'Navigation','وضع التجربة':'Demo mode'
+};
+const NOUN={'شخص':['person','people'],'دقيقة':['minute','minutes'],'ساعة':['hour','hours'],'تحويل':['transfer','transfers'],'صوت واحد':['vote','votes'],'قطّة وحدة':['pool','pools']};
+const AR2EN=s=>s.replace(/ر\.س/g,'SAR');
+const NAME='(.+?)';
+const ENP=[
+ [/^أهلاً (.+)$/,(m,a)=>`Hi ${a}`],
+ [/^المرحلة (\d) من 3 ·$/,(m,a)=>`Step ${a} of 3 ·`],
+ [/^اليوم (.+)$/,(m,a)=>`Today ${a}`],
+ [/^لك ([\d.,]+) ر\.س$/,(m,a)=>`You get ${a} SAR`],
+ [/^من ([\d.,]+) ر\.س$/,(m,a)=>`of ${a} SAR`],
+ [/^(\d+) أصوات$/,(m,a)=>`${a} votes`],
+ [/^التصويت يقفل بعد (.+) · (\d+) معهم$/,(m,a,b)=>`Voting closes in ${enDur(a)} · ${b} in`],
+ [/^(\d+) معهم$/,(m,a)=>`${a} in`],
+ [/^(.+) · ننتظر الشراء$/,(m,a)=>`${enCount(a)} · waiting for purchase`],
+ [/^([\d.,]+) ر\.س على كل واحد · باقي (.+)$/,(m,a,b)=>`${a} SAR each · ${enCount(b)} left`],
+ [/^([\d.,]+) ر\.س على كل واحد · الكل حوّل$/,(m,a)=>`${a} SAR each · everyone paid`],
+ [/^([\d.,]+) ر\.س على كل واحد\.?$/,(m,a)=>`${a} SAR each`],
+ [/^([\d.,]+) ر\.س$/,(m,a)=>`${a} SAR`],
+ [/^عليك ([\d.,]+) ر\.س لـ (.+)$/,(m,a,b)=>`You owe ${b} ${a} SAR`],
+ [/^لك ([\d.,]+) ر\.س عند (.+)$/,(m,a,b)=>`${a} SAR due from ${enCount(b)}`],
+ [/^لك ([\d.,]+)$/,(m,a)=>`Gets ${a}`],[/^له ([\d.,]+)$/,(m,a)=>`Gets ${a}`],[/^عليه ([\d.,]+)$/,(m,a)=>`Owes ${a}`],
+ [/^حوّل ([\d.,]+) ر\.س$/,(m,a)=>`Pay ${a} SAR`],[/^دفع ([\d.,]+) ر\.س$/,(m,a)=>`Paid ${a} SAR`],
+ [/^حوّل ✓$/,()=>'Paid ✓'],[/^وصله ✓$/,()=>'Received ✓'],
+ [/^سجّلت ([\d.,]+) ر\.س$/,(m,a)=>`Logged ${a} SAR`],
+ [/^خلصت؟ اقسم المبلغ على (.+)\.$/,(m,a)=>`Done? Split it between ${enCount(a)}.`],
+ [/^اشترِ لـ (.+)$/,(m,a)=>`Buy for ${enCount(a)}`],
+ [/^(.+) يشتري الحين$/,(m,a)=>`${a} is buying now`],
+ [/^سجّلت إنك دفعت ([\d.,]+) ر\.س$/,(m,a)=>`You logged ${a} SAR`],
+ [/^وصل طلبك لـ (.+)$/,(m,a)=>`Request sent to ${a}`],
+ [/^اطلب من (.+) يضيفك\.$/,(m,a)=>`Ask ${a} to add you.`],
+ [/^عشان تشارك في القطّة، لازم يضيفك (.+)\.$/,(m,a)=>`To join this pool, ${a} has to add you.`],
+ [/^وصلك (.+) من (.+) ر\.س$/,(m,a,b)=>`Received ${a} of ${b} SAR`],
+ [/^وصل (.+) من (.+) ر\.س$/,(m,a,b)=>`Received ${a} of ${b} SAR`],
+ [/^باقي ([\d.,]+) ر\.س ما تحوّل$/,(m,a)=>`${a} SAR still unpaid`],
+ [/^ترجّع لـ (.+)$/,(m,a)=>`Pay back ${a}`],[/^(.+) يرجّع لـ (.+)$/,(m,a,b)=>`${a} pays back ${b}`],
+ [/^التحويلات لك$/,()=>'Payments to you'],[/^التحويلات لـ (.+)$/,(m,a)=>`Payments to ${a}`],
+ [/^(\d+) من (\d+) حوّلوا$/,(m,a,b)=>`${a} of ${b} paid`],
+ [/^المشاركون \((\d+)\)$/,(m,a)=>`People (${a})`],
+ [/^ر\.س (منك|من (.+)) (لك|لـ (.+))$/,(m,a,b,c,d)=>`SAR ${a==='منك'?'from you':'from '+b} ${c==='لك'?'to you':'to '+d}`],
+ [/^حساب (.+)$/,(m,a)=>`${a}'s account`],
+ [/^مشتريات (.+)$/,(m,a)=>`${a}'s purchases`],
+ [/^ينتهي التصويت (.+)$/,(m,a)=>`Voting ends ${enTime(a)}`],
+ [/^يقفل (اليوم|بكرة) (.+)$/,(m,a,b)=>`Closes ${a==='اليوم'?'today':'tomorrow'} ${b}`],
+ [/^(\d+) (شخص|أشخاص)$/,(m,a)=>`${a} people`],[/^شخصين$/,()=>'2 people'],
+ [/^(.+) · (.+) · (.+) SAR$/,null],
+ [/^متأكد؟ اضغط مرة ثانية للحذف$/,()=>'Sure? Tap again to delete'],
+ [/^احذف القطّة$/,()=>'Delete pool'],[/^تعديل القطّة$/,()=>'Edit pool'],
+ [/^(.+) ← (.+)$/,(m,a,b)=>`${a} → ${b}`],
+ [/^الساعة (.+)$/,(m,a)=>enTime('الساعة '+a)],
+];
+function enCount(s){s=s.trim();if(/^شخصين$/.test(s))return '2 people';if(/^تحويلين$/.test(s))return '2 transfers';if(s==='شخص')return '1 person';if(s==='تحويل')return '1 transfer';
+  const m=s.match(/^(\d+) (\S+)$/);if(m){const map={'أشخاص':'people','شخص':'people','تحويلات':'transfers','تحويل':'transfers','قطّات':'pools','قطّة':'pools','أصوات':'votes'};return `${m[1]} ${map[m[2]]||m[2]}`}return s}
+function enDur(s){s=s.trim();const t={'دقيقة':'1 min','دقيقتين':'2 min','ساعة':'1 hour','ساعتين':'2 hours','ساعة ونص':'1.5 hours','ساعتين ونص':'2.5 hours'};if(t[s])return t[s];
+  const m=s.match(/^(\d+) (دقايق|دقيقة|ساعات|ساعة)$/);if(m)return m[1]+(/دق/.test(m[2])?' min':' hours');return s}
+function enTime(s){return s.replace(/^الساعة /,'at ').replace(/ م$/,' PM').replace(/ ص$/,' AM')}
+function tr(s){if(LANG!=='en'||!s)return s;const k=s.trim();if(!k||!/[؀-ۿ]/.test(k))return s;
+  if(EN[k]!=null)return s.replace(k,EN[k]);
+  for(const [re,f] of ENP){if(!f)continue;const m=k.match(re);if(m)return s.replace(k,f(...m))}
+  /* last resort: translate counts and currency inside mixed text */
+  const t=k.replace(/(\d+) (أشخاص|شخص)/g,'$1 people').replace(/شخصين/g,'2 people').replace(/ر\.س/g,'SAR').replace(/ (م|ص)$/,m=>m===' م'?' PM':' AM');
+  return t!==k?s.replace(k,t):s}
+function trNode(n){if(LANG!=='en')return;if(n.nodeType===3){const v=tr(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v;return}
+  if(n.nodeType!==1||n.closest&&n.closest('[data-raw]'))return;
+  for(const a of ['placeholder','aria-label','title']){const v=n.getAttribute&&n.getAttribute(a);if(v){const t=tr(v);if(t!==v)n.setAttribute(a,t)}}
+  const w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT|NodeFilter.SHOW_ELEMENT);let x;while((x=w.nextNode())){if(x.nodeType===3){const v=tr(x.nodeValue);if(v!==x.nodeValue)x.nodeValue=v}else for(const a of ['placeholder','aria-label','title']){const v=x.getAttribute(a);if(v){const t=tr(v);if(t!==v)x.setAttribute(a,t)}}}}
+const trObs=new MutationObserver(ms=>{if(LANG!=='en')return;for(const m of ms){if(m.type==='characterData')trNode(m.target);else m.addedNodes.forEach(trNode)}});
+function applyLang(){const en=LANG==='en';document.documentElement.lang=en?'en':'ar';document.documentElement.dir=en?'ltr':'rtl';trObs.disconnect();
+  if(en){trNode(document.body);trObs.observe(document.body,{childList:true,subtree:true,characterData:true})}}
+function setLang(l){LANG=l==='en'?'en':'ar';try{localStorage.setItem('qatta-lang',LANG)}catch(e){}
+  if(LANG==='ar'){location.reload();return}applyLang();render()}
+
 const THEMES={
   emerald:{n:'زمردي',c:'#17694F',a:['#1C7A5A','#14634A','#0E4A38']},
   navy:{n:'كحلي',c:'#1F4E8C',a:['#2A63AD','#1F4E8C','#13325E']},
@@ -631,6 +784,11 @@ function applyTheme(k){const t=THEMES[k]||THEMES.emerald,st=document.documentEle
   st.setProperty('--a1',t.a[0]);st.setProperty('--a2',t.a[1]);st.setProperty('--a3',t.a[2]);st.setProperty('--e-hero','0 22px 44px -24px '+rgba(t.a[2],.65));
   try{localStorage.setItem('qatta-theme',k)}catch(e){}}
 applyTheme(themeKey());
+const BGS={ivory:{n:'عاجي',bg:'#F5F3EC',s2:'#FBFAF6'},white:{n:'أبيض',bg:'#FFFFFF',s2:'#F7F7F5'},grey:{n:'رمادي',bg:'#F2F2F7',s2:'#F8F8FA'},mint:{n:'نعناعي',bg:'#EEF5F1',s2:'#F6FAF8'},sand:{n:'رملي',bg:'#F4EEE4',s2:'#FAF6F0'}};
+function bgKey(){try{return BGS[localStorage.getItem('qatta-bg')]?localStorage.getItem('qatta-bg'):'ivory'}catch(e){return'ivory'}}
+function applyBg(k){const b=BGS[k]||BGS.ivory,st=document.documentElement.style;st.setProperty('--bg',b.bg);st.setProperty('--surface2',b.s2);st.setProperty('--nav',b.bg+'D9');
+  const m=document.querySelector('meta[name=theme-color]');if(m)m.content=b.bg;try{localStorage.setItem('qatta-bg',k)}catch(e){}}
+applyBg(bgKey());
 const LSK='qatta-seen';const seen=()=>{try{return localStorage.getItem(LSK)==='1'}catch(e){return true}};const markSeen=()=>{try{localStorage.setItem(LSK,'1')}catch(e){}};
 
 /* ---------- storage ---------- */
@@ -720,8 +878,8 @@ function calc(ps,hub){
 const ph=d=>!d?'vote':d.phase==='pay'?'pay':d.phase==='shop'?'shop':(d.until&&Date.now()>=d.until)?'shop':'vote';
 const clock=ms=>{ms=Math.max(0,ms);const h=Math.floor(ms/3600e3),m=Math.floor(ms%3600e3/60e3),s=Math.floor(ms%60e3/1e3);return (h?h+':'+String(m).padStart(2,'0'):m)+':'+String(s).padStart(2,'0')};
 const words=ms=>{const m=Math.max(1,Math.ceil(ms/60e3));if(m<60)return P_(m,'دقيقة','دقيقتين','دقايق');const h=Math.floor(m/60),half=m%60>=30;if(h===1&&half)return 'ساعة ونص';if(h===2&&half)return 'ساعتين ونص';return P_(h,'ساعة','ساعتين','ساعات')};
-const vstr=ts=>{try{const d=new Date(ts),t=d.toLocaleTimeString('ar-u-nu-latn',{hour:'numeric',minute:'2-digit'});return (d.toDateString()===new Date().toDateString()?'اليوم ':d.toLocaleDateString('ar-u-nu-latn',{weekday:'long'})+' ')+t}catch(e){return''}};
-const tstr=ts=>{try{const d=new Date(ts),t=d.toLocaleTimeString('ar-u-nu-latn',{hour:'numeric',minute:'2-digit'});return d.toDateString()===new Date().toDateString()?'الساعة '+t:d.toLocaleDateString('ar-u-nu-latn',{weekday:'long'})+' '+t}catch(e){return''}};
+const vstr=ts=>{try{const d=new Date(ts),t=d.toLocaleTimeString(LOC(),{hour:'numeric',minute:'2-digit'});return (d.toDateString()===new Date().toDateString()?'اليوم ':d.toLocaleDateString(LOC(),{weekday:'long'})+' ')+t}catch(e){return''}};
+const tstr=ts=>{try{const d=new Date(ts),t=d.toLocaleTimeString(LOC(),{hour:'numeric',minute:'2-digit'});return d.toDateString()===new Date().toDateString()?'الساعة '+t:d.toLocaleDateString(LOC(),{weekday:'long'})+' '+t}catch(e){return''}};
 
 /* ---------- names ---------- */
 async function names(ps){
@@ -762,16 +920,19 @@ async function home(tok){
   let h=demoBar()+`<h1 class="lt" id="lt">القطّات</h1><p class="lsub">${me.name?`أهلاً ${esc(me.name)}`:"قطّاتك مع الربع"}</p>`+noteHtml();
   if(!loaded&&!local)return h+`<p class="note">جاري التحميل…</p>`;
   const done=ds.filter(d=>isDone(d)),act=ds.filter(d=>!isDone(d));
-  const archRow=done.length?`<a class="pc arch fade" href="#archive"><div class="pc-top"><span class="tile" style="background:#7C857F">${I.box}</span><span class="tx"><b>القطّات المنتهية</b><small>${P_(done.length,'قطّة وحدة','قطّتين','قطّات')}</small></span>${I.chev}</div></a>`:'';
-  if(!act.length&&done.length)return h+`<div class="empty fade" style="padding-bottom:28px"><h2>ما عندك قطّات حالية</h2><p>كل قطّاتك خلصت.</p></div>`+archRow;
-  if(!ds.length)return h+`<div class="empty fade"><div style="display:flex;justify-content:center;margin-bottom:16px">${tile({cat:'other'},64)}</div><h2>ما عندك قطّات للحين</h2><p>اضغط "قطّة جديدة" تحت، وأرسل الرابط للقروب.</p></div>`;
+  h+=`<div class="seg2" role="tablist"><button role="tab" data-ht="now" class="${homeTab==='now'?'on':''}" aria-selected="${homeTab==='now'}">القطّات الحالية${act.length?` <i>${act.length}</i>`:''}</button><button role="tab" data-ht="done" class="${homeTab==='done'?'on':''}" aria-selected="${homeTab==='done'}">القطّات المنتهية${done.length?` <i>${done.length}</i>`:''}</button></div>`;
+  if(homeTab==='done'){lastN=await names(done.flatMap(d=>ppl(d.id)));if(tok!==rtok)return null;
+    if(!done.length)return h+`<div class="empty fade"><h2>ما فيه قطّات منتهية</h2><p>أول ما يحوّل الكل في قطّة، تنتقل هنا.</p></div>`;
+    return h+`<div class="group fade">`+done.map(d=>{const c=calc(ppl(d.id),d.by);let dt='';try{dt=new Date(d.until||d.at).toLocaleDateString(LOC(),{day:'numeric',month:'long'})}catch(e){}
+      return `<a class="cell tap" href="#d-${esc(d.id)}" style="--indent:74px">${tile(d,44)}<span class="tx"><span>${esc(d.title)}</span><small>${esc(dt)} · ${P_(c.n,'شخص','شخصين','أشخاص')} · <span class="num">${fmt(c.t)} ر.س</span></small></span><span class="okc" style="font-size:14px">خلصت ✓</span>${I.chev}</a>`}).join('')+`</div>`}
+  if(!act.length)return h+`<div class="empty fade"><div style="display:flex;justify-content:center;margin-bottom:16px">${tile({cat:'other'},64)}</div><h2>ما عندك قطّات حالية</h2><p>اضغط "قطّة جديدة" تحت عشان تبدأ.</p></div>`;
   const all=ds.flatMap(d=>ppl(d.id));lastN=await names(all);if(tok!==rtok)return null;
   act.sort((a,b)=>isPinned(b.id)-isPinned(a.id));
   return h+act.map(d=>{const ps=ppl(d.id),c=calc(ps,d.by),td=myTodo(d,ps);
     const own=isCreator(d),canDel=own||true,pin=isPinned(d.id),id=esc(d.id);
     const btn=(cls,act,icon,label)=>`<button class="swa ${cls}" data-swa="${act}" data-id="${id}"><span class="swb">${icon}</span><span class="swl">${label}</span></button>`;
     return `<div class="swipe" data-sw="${id}"><div class="sw-l">${btn('sh','share',I.share,'مشاركة')}${canDel?btn('dl','del',I.trash,own?'حذف':'إزالة'):''}</div><div class="sw-r">${btn('pn','pin',I.pinT,pin?'إلغاء التثبيت':'تثبيت')}</div><a class="pc" href="#d-${id}"><div class="pc-top">${tile(d)}<span class="tx"><b>${pin?`<span class="pinmark">${I.pinT}</span>`:''}${esc(d.title)}</b><small>${esc(statusLine(d,ps))}</small></span>${I.chev}</div>
-    <div class="pc-bot">${c.g.length?stack(c.g.map(p=>p.k)):'<small style="color:var(--l2)">ما أحد للحين</small>'}<span class="todo ${td.k}">${esc(td.t)}</span></div></a></div>`}).join('')+archRow;
+    <div class="pc-bot">${c.g.length?stack(c.g.map(p=>p.k)):'<small style="color:var(--l2)">ما أحد للحين</small>'}<span class="todo ${td.k}">${esc(td.t)}</span></div></a></div>`}).join('');
 }
 /* a pool is finished once it is in the paying step and every transfer is ticked */
 function isDone(d){if(ph(d)!=='pay'||!peopleBy[d.id])return false;const c=calc(ppl(d.id),d.by);return c.n>0&&c.T.every(x=>x.done)}
@@ -780,7 +941,7 @@ async function archive(tok){
   lastN=await names(ds.flatMap(d=>ppl(d.id)));if(tok!==rtok)return null;
   let h=`<h1 class="lt" id="lt">المنتهية</h1><p class="lsub">قطّات خلصت والكل حوّل فيها</p>`;
   if(!ds.length)return h+`<div class="empty fade"><h2>ما فيه قطّات منتهية</h2><p>أول ما يحوّل الكل في قطّة، تنتقل هنا.</p></div>`;
-  return h+`<div class="group fade">`+ds.map(d=>{const c=calc(ppl(d.id),d.by);let dt='';try{dt=new Date(d.until||d.at).toLocaleDateString('ar-u-nu-latn',{day:'numeric',month:'long'})}catch(e){}
+  return h+`<div class="group fade">`+ds.map(d=>{const c=calc(ppl(d.id),d.by);let dt='';try{dt=new Date(d.until||d.at).toLocaleDateString(LOC(),{day:'numeric',month:'long'})}catch(e){}
     return `<a class="cell tap" href="#d-${esc(d.id)}" style="--indent:74px">${tile(d,44)}<span class="tx"><span>${esc(d.title)}</span><small>${esc(dt)} · ${P_(c.n,'شخص','شخصين','أشخاص')} · <span class="num">${fmt(c.t)} ر.س</span></small></span><span class="okc" style="font-size:14px">خلصت ✓</span>${I.chev}</a>`}).join('')+`</div>`;
 }
 const STEPS=[['vote','نجمع الأسماء'],['shop','الشراء'],['pay','الدفع']];
@@ -900,16 +1061,13 @@ async function detail(d,tok){
   detail.msg=P==='pay'?remind(d,c):P==='vote'?invite(d):shopMsg(d,c,host);
   return h;
 }
-function invite(d){const m=mapsShort(d),L=[`*${d.title}*`];
-  if(d.place)L.push(`📍 ${d.place}`);
+function invite(d){const m=mapsShort(d),L=[`▫️ ${d.title}`];
   if(d.until)L.push(`⏰ ينتهي التصويت ${tstr(d.until)}`);
-  if(m)L.push(`🗺️ ${m}`);
-  L.push('','صوّت من هنا 👇',link(d.id));return L.join('\n')}
-function shopMsg(d,c,host){return [`*${d.title}*`,`قفل التصويت · ${P_(c.n,'شخص','شخصين','أشخاص')} معنا`,`${host} يشتري الحين، والمبلغ ينزل هنا 👇`,link(d.id)].join('\n')}
-function remind(d,c){const left=c.T.filter(x=>!x.done);
-  const L=[`*قطّة ${d.title}*`,`على كل واحد ${fmt(c.share)} ر.س`,''];
-  if(left.length)left.forEach(x=>{const r=c.by[x.t];L.push(`• ${lastN.N[x.f]} ← ${lastN.N[x.t]}: ${fmt(x.a)} ر.س${r&&r.acct?' ('+r.acct+')':''}`)});else L.push('الكل حوّل، مشكورين 🙏');
-  L.push('',link(d.id));return L.join('\n')}
+  if(d.place)L.push(`📍 ${d.place}`);
+  if(m)L.push(m);
+  L.push(link(d.id));return L.join('\n')}
+function shopMsg(d,c,host){return [`▫️ ${d.title}`,`🛒 ${host} يشتري الحين`,link(d.id)].join('\n')}
+function remind(d,c){return [`▫️ ${d.title}`,`💰 القطّة ${fmt(c.share)} ر.س`,link(d.id)].join('\n')}
 
 /* ---------- sheets ---------- */
 function shNav(title,save,saveTxt='حفظ',cancel='إلغاء'){return `<div class="shnav"><button class="nbtn" data-x>${cancel}</button><b>${title}</b>${save?`<button class="nbtn" id="${save}">${saveTxt}</button>`:'<span></span>'}</div>`}
@@ -917,7 +1075,7 @@ const pad=n=>String(n).padStart(2,'0');
 const tvAt=ts=>{const d=new Date(ts);return pad(d.getHours())+':'+pad(d.getMinutes())};
 const tvIn=h=>tvAt(Date.now()+h*3600e3);
 function untilFrom(v){if(!/^\d{1,2}:\d{2}$/.test(v||''))return NaN;const [H,M]=v.split(':').map(Number),d=new Date();d.setHours(H,M,0,0);if(d.getTime()<=Date.now()+60e3)d.setDate(d.getDate()+1);return d.getTime()}
-function uhint(v){const u=untilFrom(v);if(!u)return'';return (new Date(u).toDateString()===new Date().toDateString()?'يقفل اليوم ':'يقفل بكرة ')+new Date(u).toLocaleTimeString('ar-u-nu-latn',{hour:'numeric',minute:'2-digit'})}
+function uhint(v){const u=untilFrom(v);if(!u)return'';return (new Date(u).toDateString()===new Date().toDateString()?'يقفل اليوم ':'يقفل بكرة ')+new Date(u).toLocaleTimeString(LOC(),{hour:'numeric',minute:'2-digit'})}
 const dlv=h=>new Date(Date.now()+h*3600e3-new Date().getTimezoneOffset()*60e3).toISOString().slice(0,16);
 function sheetHtml(){
   if(!sh)return'';
@@ -1069,12 +1227,14 @@ function closeMap(save){if(MAP){MAP.remove();MAP=null}meDot=null;LAY=null;sheet.
 /* ---------- settings ---------- */
 function myPhotoHtml(sz){const s=me.photo,n=me.name||'?',c=hue(n);return `<span class="av" style="width:${sz}px;height:${sz}px;font-size:${Math.round(sz*.4)}px;background:linear-gradient(160deg,${c[0]},${c[1]})">${s?`<img alt="" src="${esc(s)}">`:esc(n.trim().slice(0,1))}</span>`}
 function settingsPage(){const tk=themeKey();
-  return `<h1 class="lt" id="lt">الإعدادات</h1><p class="lsub">حسابك وشكل التطبيق</p>
+  return `<h1 class="lt" id="lt">الحساب</h1><p class="lsub">اسمك وصورتك وشكل التطبيق</p>
   <div class="gh">الملف الشخصي</div><div class="group prof">
     <div class="pf-top">${myPhotoHtml(76)}<div class="pf-btns"><label class="pill sm2">${I.camera} تغيير الصورة<input type="file" id="photoIn" accept="image/*" hidden></label>${me.photo?'<button class="pill sm2 ghost" data-rmphoto>إزالة</button>':''}</div></div>
     <div class="cell"><input class="in-cell" id="setname" enterkeyhint="done" autocomplete="name" placeholder="اسمك" value="${esc(me.name||'')}"><button class="mini g" data-savename>حفظ</button></div></div>
   <p class="gf">اسمك وصورتك يشوفها ربعك في القطّات.</p>
-  <div class="gh">لون التطبيق</div><div class="group swatches">${Object.entries(THEMES).map(([k,t])=>`<button class="sw ${k===tk?'on':''}" data-theme-k="${k}" aria-pressed="${k===tk}"><span style="background:linear-gradient(150deg,${t.a[0]},${t.a[2]})">${k===tk?I.check:''}</span>${t.n}</button>`).join('')}</div>
+  <div class="gh">اللغة</div><div class="group"><div class="seg2 in" role="radiogroup"><button data-lang="ar" class="${LANG==='ar'?'on':''}" aria-checked="${LANG==='ar'}">العربية</button><button data-lang="en" class="${LANG==='en'?'on':''}" aria-checked="${LANG==='en'}">English</button></div></div>
+  <div class="gh">لون الخلفية</div><div class="group swatches">${Object.entries(BGS).map(([k,t])=>`<button class="sw ${k===bgKey()?'on':''}" data-bg-k="${k}" aria-pressed="${k===bgKey()}"><span class="bgs" style="background:${t.bg}">${k===bgKey()?I.check:''}</span>${t.n}</button>`).join('')}</div>
+  <div class="gh">اللون الأساسي</div><div class="group swatches">${Object.entries(THEMES).map(([k,t])=>`<button class="sw ${k===tk?'on':''}" data-theme-k="${k}" aria-pressed="${k===tk}"><span style="background:linear-gradient(150deg,${t.a[0]},${t.a[2]})">${k===tk?I.check:''}</span>${t.n}</button>`).join('')}</div>
   <div class="gh">مساعدة</div><div class="group"><button class="cell tap" data-help style="--indent:58px"><span class="ico">${I.people}</span><span class="tx">كيف يشتغل التطبيق</span>${I.chev}</button></div>
   <p class="note" style="margin-top:28px">القطّة · الإصدار 1.3</p>`}
 function photoFile(f){if(!f)return;const img=new Image(),u=URL.createObjectURL(f);img.onload=()=>{const S=160,c=document.createElement('canvas');c.width=c.height=S;const x=c.getContext('2d'),m=Math.min(img.width,img.height);
@@ -1139,6 +1299,11 @@ app.addEventListener('click',e=>{const c=e.target.closest('.swipe .pc');if(c&&(c
   if(b.dataset.swa==='del'){const l=b.querySelector('.swl');if(!b.classList.contains('armed')){b.classList.add('armed');l.dataset.l=l.textContent;l.textContent='متأكد؟';setTimeout(()=>{if(b.isConnected&&b.classList.contains('armed')){b.classList.remove('armed');l.textContent=l.dataset.l}},3500);return}
     deletePool(id)}},true);
 
+/* ---------- tab bar ---------- */
+function setTabs(show,tab){const t=$('tabbar');t.hidden=!show;document.body.classList.toggle('has-tabs',show);
+  t.querySelectorAll('[data-tab]').forEach(a=>{const on=a.dataset.tab===tab;a.classList.toggle('on',on);on?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')})}
+let homeTab='now';
+
 /* ---------- render ---------- */
 const route=()=>location.hash.slice(1);
 const dref=()=>db.doc('dinners/'+cur);
@@ -1160,17 +1325,16 @@ async function render(){
   if(r.startsWith('d-')){
     cur=r.slice(2);watchPool(cur);syncSubs();
     const d=dinners.find(x=>x.id===cur);
-    $('back').hidden=false;$('back').href=d&&isDone(d)?'#archive':'#';$('back').lastChild.textContent=d&&isDone(d)?'المنتهية':'القطّات';$('fab').hidden=true;{const hb=$('helpB'),own=isCreator(d)&&!ro;hb.textContent=own?'تعديل':'؟';hb.classList.toggle('help',!own);hb.dataset.mode=own?'edit':'help'}$('ntitle').textContent=d?d.title:'';
+    setTabs(false);$('back').hidden=false;$('back').href='#';$('back').lastChild.textContent='القطّات';$('fab').hidden=true;{const hb=$('helpB'),own=isCreator(d)&&!ro;hb.textContent=own?'تعديل':'؟';hb.classList.toggle('help',!own);hb.dataset.mode=own?'edit':'help'}$('ntitle').textContent=d?d.title:'';
     const h=await detail(d,tok);if(h===null||tok!==rtok)return;
     app.innerHTML=h;watchTitle();detail.ph=ph(d);
     if(sh&&(sh.kind==='tr'||sh.kind==='votes'))reSheet();
     return;
   }
-  if(r==='settings'){cur=null;$('back').hidden=false;$('back').href='#';$('back').lastChild.textContent='القطّات';$('fab').hidden=true;{const hb=$('helpB');hb.style.visibility='hidden'}$('ntitle').textContent='الإعدادات';
+  if(r==='settings'){cur=null;setTabs(true,'acct');$('back').hidden=true;$('fab').hidden=true;{const hb=$('helpB');hb.style.visibility='hidden'}$('ntitle').textContent='الحساب';
     app.innerHTML=settingsPage();watchTitle();return}
-  if(r==='archive'){cur=null;$('back').hidden=false;$('back').href='#';$('back').lastChild.textContent='القطّات';$('fab').hidden=true;{const hb=$('helpB');hb.textContent='؟';hb.classList.add('help');hb.dataset.mode='help'}$('ntitle').textContent='المنتهية';
-    const h=await archive(tok);if(h===null||tok!==rtok)return;app.innerHTML=h;watchTitle();return}
-  cur=null;$('back').hidden=true;$('back').href='#';$('back').lastChild.textContent='القطّات';$('fab').hidden=false;{const hb=$('helpB');hb.innerHTML=I.gear;hb.classList.add('help');hb.dataset.mode='settings';hb.setAttribute('aria-label','الإعدادات')}$('ntitle').textContent='القطّات';
+  if(r==='archive'){homeTab='done';location.replace('#');return}
+  cur=null;setTabs(true,'home');$('back').hidden=true;$('fab').hidden=homeTab!=='now';{const hb=$('helpB');hb.style.visibility='hidden'}$('ntitle').textContent='القطّات';
   const h=await home(tok);if(h===null||tok!==rtok)return;app.innerHTML=h;watchTitle();
 }
 
@@ -1197,8 +1361,7 @@ function togglePay(f,t){const p=ppl(cur).find(x=>x.k===f);if(!p)return;const val
 /* the phone's own share menu; WhatsApp is the fallback where the menu isn't available */
 function sendText(text,id){return shareMsg(text,id)}
 async function shareMsg(t,id){const text=t||detail.msg||'';
-  const url=link(id||cur),body=text.split(url).join('').trim();
-  if(navigator.share){try{await navigator.share({title:'القطّة',text:body,url});return}catch(e){if(e&&e.name==='AbortError')return}}
+  if(navigator.share){try{await navigator.share({text});return}catch(e){if(e&&e.name==='AbortError')return}}
   const a=document.createElement('a');a.href='https://wa.me/?text='+encodeURIComponent(text);a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove()}
 async function copy(t,ok='تم النسخ'){try{await navigator.clipboard.writeText(String(t));hud(ok)}catch(e){hud('تعذّر النسخ',false)}}
 
@@ -1211,12 +1374,15 @@ app.addEventListener('click',e=>{
   if(b.hasAttribute('data-savename')){saveSetName();return}
   if(b.hasAttribute('data-rmphoto')){setPhoto('');return}
   if(b.dataset.themeK){applyTheme(b.dataset.themeK);render();return}
+  if(b.dataset.bgK){applyBg(b.dataset.bgK);render();return}
+  if(b.dataset.lang){setLang(b.dataset.lang);return}
   if(b.hasAttribute('data-help')){openSheet({kind:'welcome'});return}
   if(b.hasAttribute('data-demo')){enterDemo();hud('صرت واحد من الربع');return}
   if(b.hasAttribute('data-exitdemo')){exitDemo();return}
   if(b.hasAttribute('data-votes')){openSheet({kind:'votes'});return}
   if(b.hasAttribute('data-editp')){const d=dinners.find(x=>x.id===cur);openSheet({kind:'edit',cat:(d&&d.cat)||'dinner'});return}
   if(b.dataset.go)vote(b.dataset.go==='1');
+  else if(b.dataset.ht){homeTab=b.dataset.ht;render();return}
   else if(b.hasAttribute('data-editbuy')){const d=dinners.find(x=>x.id===cur),me2=ppl(cur).find(p=>p.uid===myUid()),k=d&&ppl(cur).some(p=>p.k===d.by)?d.by:me2&&me2.k;
     const t=$('buys');if(t){const top=t.getBoundingClientRect().top+window.scrollY-70;window.scrollTo({top:Math.max(0,top),behavior:'smooth'})}else window.scrollTo({top:0,behavior:'smooth'});
     if(k)setTimeout(()=>openSheet({kind:'items',k}),t?480:250)}
@@ -1331,6 +1497,7 @@ setInterval(()=>{tick++;const busy=document.activeElement&&document.activeElemen
 },1000);
 
 /* ---------- boot ---------- */
+$('tiHome').innerHTML=I.homeI;$('tiAcct').innerHTML=I.person1;applyLang();
 (async()=>{
   const cfg=window.QATTA_FIREBASE;let nm='',ph0='';try{nm=localStorage.getItem('qatta-name')||'';ph0=localStorage.getItem('qatta-photo')||''}catch(e){}
   if(cfg&&cfg.apiKey&&!/^PUT/.test(cfg.apiKey)){
