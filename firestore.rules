@@ -1,0 +1,40 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function pool(id) { return get(/databases/$(database)/documents/dinners/$(id)).data; }
+    function isOwner(id) { return signedIn() && pool(id).by == request.auth.uid; }
+    function voteOpen(id) { return pool(id).phase == 'vote' && pool(id).until > request.time.toMillis(); }
+
+    // a pool is read by its link only: nobody can list everyone's pools
+    match /dinners/{id} {
+      allow get: if signedIn();
+      allow list: if false;
+      allow create: if signedIn() && request.resource.data.by == request.auth.uid;
+      allow update, delete: if signedIn() && resource.data.by == request.auth.uid;
+
+      match /people/{pid} {
+        allow read: if signedIn();
+        // join yourself while voting is open, or ask to join after it closes
+        allow create: if isOwner(id)
+          || (signedIn() && pid == request.auth.uid
+              && (voteOpen(id) || (request.resource.data.req == true && request.resource.data.going == false)));
+        // the owner can change anyone; you can change yourself, but only the owner lets you in after voting closes;
+        // anyone signed in may tick a payment as done (only the "paid" field)
+        allow update: if isOwner(id)
+          || (signedIn() && pid == request.auth.uid
+              && (voteOpen(id)
+                  || !request.resource.data.diff(resource.data).affectedKeys().hasAny(['going'])
+                  || request.resource.data.going == false))
+          || (signedIn() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['paid']));
+        allow delete: if isOwner(id);
+      }
+    }
+
+    // each person's own list of pools and their name
+    match /users/{uid} {
+      allow read, write: if signedIn() && request.auth.uid == uid;
+    }
+  }
+}
