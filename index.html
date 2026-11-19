@@ -1063,7 +1063,7 @@ async function detail(d,tok){
     rows.push(`<button class="cell tap" data-editp style="--indent:58px"><span class="ico" style="background:#7C857F">${I.edit}</span><span class="tx">تعديل أو حذف القطّة</span>${I.chev}</button>`);
     h+=`<div class="group">${rows.join('')}</div>`;
   }
-  detail.msg=P==='pay'?remind(d,c):P==='vote'?invite(d):shopMsg(d,c,host);
+  detail.msg=P==='pay'?remind(d,c):P==='vote'?invite(d):shopMsg(d,c,host);shortFetch(d.id);
   return h;
 }
 function mapsShort(d){return d&&d.lat!=null&&d.lng!=null?`maps.google.com/?q=${d.lat},${d.lng}`:(d&&d.loc)||''}
@@ -1366,7 +1366,15 @@ function request(){
 function togglePay(f,t){const p=ppl(cur).find(x=>x.k===f);if(!p)return;const val=p.paid&&p.paid[t]?0:Date.now(),ref=pref(f);queue(ref.path,()=>ref.update({paid:{[t]:val}}));if(val)hud('تم، شكراً')}
 /* the phone's own share menu; WhatsApp is the fallback where the menu isn't available */
 function sendText(text,id){return shareMsg(text,id)}
-async function shareMsg(t,id){const text=t||detail.msg||'';
+/* short pool link (is.gd), fetched when a pool opens so sharing stays inside the tap */
+const SHK='qatta-short';
+function shortGet(id){try{return JSON.parse(localStorage.getItem(SHK)||'{}')[id]||''}catch(e){return ''}}
+function shortFetch(id){if(!id||shortGet(id)||shortFetch[id]||!/^https:/.test(link(id)))return;shortFetch[id]=1;
+  const cb='qs_'+id.replace(/\W/g,''),sc=document.createElement('script'),end=()=>{delete window[cb];sc.remove()};
+  window[cb]=r=>{end();const u=r&&r.shorturl;if(typeof u==='string'&&/^https:\/\/is\.gd\/\w+$/.test(u)){try{const o=JSON.parse(localStorage.getItem(SHK)||'{}');o[id]=u;localStorage.setItem(SHK,JSON.stringify(o))}catch(e){}}else shortFetch[id]=0};
+  sc.onerror=()=>{end();shortFetch[id]=0};
+  sc.src='https://is.gd/create.php?format=json&callback='+cb+'&url='+encodeURIComponent(link(id));document.head.appendChild(sc)}
+async function shareMsg(t,id){let text=t||detail.msg||'';const pid=id||cur,sl=pid&&shortGet(pid);if(sl)text=text.split(link(pid)).join(sl);
   if(navigator.share){try{await navigator.share({text});return}catch(e){if(e&&e.name==='AbortError')return}}
   const a=document.createElement('a');a.href='https://wa.me/?text='+encodeURIComponent(text);a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove()}
 async function copy(t,ok='تم النسخ'){try{await navigator.clipboard.writeText(String(t));hud(ok)}catch(e){hud('تعذّر النسخ',false)}}
