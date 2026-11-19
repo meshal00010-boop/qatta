@@ -21,13 +21,15 @@ service cloud.firestore {
           || (signedIn() && pid == request.auth.uid
               && (voteOpen(id) || (request.resource.data.req == true && request.resource.data.going == false)));
         // the owner can change anyone; you can change yourself, but only the owner lets you in after voting closes;
-        // anyone signed in may tick a payment as done (only the "paid" field)
+        // the person receiving a transfer may tick it as done, but only their own entry in "paid"
         allow update: if isOwner(id)
           || (signedIn() && pid == request.auth.uid
               && (voteOpen(id)
                   || !request.resource.data.diff(resource.data).affectedKeys().hasAny(['going'])
                   || request.resource.data.going == false))
-          || (signedIn() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['paid']));
+          || (signedIn()
+              && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['paid'])
+              && request.resource.data.paid.diff(resource.data.get('paid', {})).affectedKeys().hasOnly([request.auth.uid]));
         allow delete: if isOwner(id);
       }
     }
