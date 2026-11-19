@@ -1066,12 +1066,10 @@ async function detail(d,tok){
   detail.msg=P==='pay'?remind(d,c):P==='vote'?invite(d):shopMsg(d,c,host);
   return h;
 }
-function invite(d){const m=mapsShort(d),L=[link(d.id),'',`▫️ ${d.title}`];
+function invite(d){const L=[link(d.id),'',`▫️ ${d.title}`];
   if(d.until)L.push(`⏰ ينتهي التصويت ${tstr(d.until)}`);
   if(d.place)L.push(`📍 ${d.place}`);
-  if(m)L.push(m);
   return L.join('\n')}
-function mapsShort(d){return d&&d.lat!=null&&d.lng!=null?`https://maps.google.com/?q=${d.lat},${d.lng}`:(d&&d.loc)||''}
 function shopMsg(d,c,host){return [link(d.id),'',`▫️ ${d.title}`,`🛒 ${host} يشتري الحين`].join('\n')}
 function remind(d,c){return [link(d.id),'',`▫️ ${d.title}`,`💰 القطّة ${fmt(c.share)} ر.س`].join('\n')}
 
