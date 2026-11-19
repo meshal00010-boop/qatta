@@ -1365,7 +1365,8 @@ function togglePay(f,t){const p=ppl(cur).find(x=>x.k===f);if(!p)return;const val
 /* the phone's own share menu; WhatsApp is the fallback where the menu isn't available */
 function sendText(text,id){return shareMsg(text,id)}
 async function shareMsg(t,id){const text=t||detail.msg||'';
-  if(navigator.share){try{await navigator.share({text});return}catch(e){if(e&&e.name==='AbortError')return}}
+  if(navigator.share){const m=text.match(/^(https?:\/\/\S+)\n+([\s\S]*)$/);const data=m?{text:m[2],url:m[1]}:{text};
+    try{await navigator.share(data);return}catch(e){if(e&&e.name==='AbortError')return}}
   const a=document.createElement('a');a.href='https://wa.me/?text='+encodeURIComponent(text);a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove()}
 async function copy(t,ok='تم النسخ'){try{await navigator.clipboard.writeText(String(t));hud(ok)}catch(e){hud('تعذّر النسخ',false)}}
 
