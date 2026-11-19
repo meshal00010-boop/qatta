@@ -27,6 +27,10 @@ Web app for splitting a pooled expense ("قطّة") among friends. Live at https
 - **Settings:** the theme, background and card colour are stored in localStorage (`qatta-theme`, `qatta-bg`, `qatta-surf`).
 - **Logo:** a bimetal coin with a gold ring and a silver centre. The centre says "قطّة" in the Lalezar font. The ring is engraved with "اجمعها • قسّمها • حوّلها".
 
+## Workflow
+- Commit and push finished changes straight to `main`. GitHub Pages serves `main`, so that's what updates the live site. Don't leave work on a branch or in a PR unless he asks for it.
+- When `firestore.rules` changes, give him the full rules text to paste into Firebase console → Firestore → Rules → Publish. Nothing else can deploy it.
+
 ## Owner's preferences (important)
 - Talk to him in short Gulf Arabic. Give the summary only and skip long explanations.
 - He wants a polished UI that feels like an Apple app. Calm green, ivory and gold.
